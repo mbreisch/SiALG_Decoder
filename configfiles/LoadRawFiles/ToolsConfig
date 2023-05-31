@@ -1,0 +1,2 @@
+LoadBinaryFile LoadBinaryFile configfiles/LoadRawFiles/ReadFile
+StoreEvent StoreEvent configfiles/LoadRawFiles/ReadFile

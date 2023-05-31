@@ -1,0 +1,15 @@
+verbose 1
+Runtime 1
+
+Path_In /mnt/s/Data/T1/
+Path_Out /mnt/s/Data/T1/
+File_Prefix wave_
+File_Sufix .dat
+
+Trigger_0 Tr_0_0.dat
+Trigger_1 Tr_0_1.dat
+
+words_in_header 8
+bytes_in_headerword 4
+words_in_data 1024
+bytes_in_dataword 4

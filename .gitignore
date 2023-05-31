@@ -1,0 +1,9 @@
+ToolDAQ
+*.o
+*.so
+include/*
+lib/*
+.vscode/*
+main
+NodeDaemon
+RemoteControl
