@@ -29,6 +29,8 @@ class TemporaryData{
     map<int,std::ifstream> FileMap;
     map<int,vector<unsigned int>> ParsedMap_Header;
     map<int,vector<float>> ParsedMap_Data;
+    map<int,vector<int>> PeakPositions;
+    map<int,vector<float>> PeakMinima;
 
     int EventCounter;
     int Runtime;
@@ -36,6 +38,7 @@ class TemporaryData{
 
     TFile* RootFile_Event;
     TTree *TTree_Event;
+    TTree *TTree_Analysis;
 
     TFile* RootFile_Analysis;
     TTree *TTree_Analysis_Charge;

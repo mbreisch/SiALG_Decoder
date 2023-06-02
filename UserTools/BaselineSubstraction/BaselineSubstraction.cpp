@@ -20,6 +20,12 @@ bool BaselineSubstraction::Initialise(std::string configfile, DataModel &data)
 
 bool BaselineSubstraction::Execute()
 {
+    if(m_data->TD.Stop==true)
+    {
+        std::cout <<"Stop has been called, skipping BLS"<<std::endl;
+        return true;
+    }
+
     for(std::map<int,vector<float>>::iterator it=m_data->TD.ParsedMap_Data.begin(); it!=m_data->TD.ParsedMap_Data.end(); ++it)
     {
         vector<float> in_vector;
@@ -84,7 +90,7 @@ float BaselineSubstraction::FitGaussianAndGetMean(const std::vector<float>& data
     // Fit the Gaussian distribution
     TF1 *fitFunc = new TF1("fitFunc", Gaussian, min, max, 2);
     fitFunc->SetParameters(hist->GetMean(), hist->GetRMS());
-    hist->Fit(fitFunc, "RNQ");
+    hist->Fit(fitFunc, "QN0R");
 
     // Extract the mean
     Double_t mean = fitFunc->GetParameter(0);

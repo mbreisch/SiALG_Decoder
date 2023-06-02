@@ -1,5 +1,5 @@
 verbose 1
-Runtime 100
+Runtime -1
 
 Path_In /mnt/s/Data/FirstData/
 Path_Out /mnt/s/Data/FirstData/
@@ -13,3 +13,6 @@ words_in_header 8
 bytes_in_headerword 4
 words_in_data 1024
 bytes_in_dataword 4
+
+threshold -7.5
+width 10

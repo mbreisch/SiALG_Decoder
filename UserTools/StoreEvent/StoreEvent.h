@@ -9,6 +9,7 @@
 #include "TTree.h"
 #include "TFile.h"
 
+#define MAX_NUM_CHANNELS 16
 
 using namespace std;
 
@@ -37,8 +38,11 @@ class StoreEvent: public Tool
         Header_ch9,Header_ch10,Header_ch11,Header_ch12,Header_ch13,Header_ch14,Header_ch15; 
     std::vector<float> Data_ch0,Data_ch1,Data_ch2,Data_ch3,Data_ch4,Data_ch5,Data_ch6,Data_ch7,Data_ch8,
         Data_ch9,Data_ch10,Data_ch11,Data_ch12,Data_ch13,Data_ch14,Data_ch15; 
+    std::vector<int> Pulses_ch0,Pulses_ch1,Pulses_ch2,Pulses_ch3,Pulses_ch4,Pulses_ch5,Pulses_ch6,Pulses_ch7,Pulses_ch8,
+        Pulses_ch9,Pulses_ch10,Pulses_ch11,Pulses_ch12,Pulses_ch13,Pulses_ch14,Pulses_ch15; 
     std::vector<unsigned int> Trigger_header_g0,Trigger_header_g1;
     std::vector<float> Trigger_data_g0,Trigger_data_g1;
+    std::vector<int> Trigger_pulse_g0,Trigger_pulse_g1;
     int EventID;
 
     void printMap(const std::map<int, std::vector<std::vector<unsigned int>>>& myMap);

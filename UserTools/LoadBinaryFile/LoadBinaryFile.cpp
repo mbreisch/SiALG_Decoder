@@ -69,16 +69,24 @@ bool LoadBinaryFile::Initialise(std::string configfile, DataModel &data)
 
 bool LoadBinaryFile::Execute()
 {
+    if(m_data->TD.Stop==true)
+    {
+        std::cout <<"Stop should never be called here!!!"<<std::endl;
+        return true;
+    }
+
     m_data->TD.ParsedMap_Data.clear();
     m_data->TD.ParsedMap_Header.clear();
     if(m_data->TD.EventCounter>=m_data->TD.Runtime && m_data->TD.Runtime!=-1)
     {
-        std::cout << "Eventcout = " << m_data->TD.EventCounter << " exceded the runtime of " << m_data->TD.Runtime << std::endl;
+        std::cout << "Eventcount=" << m_data->TD.EventCounter << " reached condition of " << m_data->TD.Runtime << " events, called stop." << std::endl;
         m_data->TD.Stop = true;
         return true;
     }
 
-    std::cout << "Starting with event " << m_data->TD.EventCounter << std::endl;  
+    if(m_verbose>1){std::cout << "-------------------------" << std::endl;}
+    if(m_verbose>1){std::cout << "Starting with event " << m_data->TD.EventCounter+1 << std::endl;}
+    else{std::cout << "\rStarting with event " << m_data->TD.EventCounter+1 << "                   " << std::flush;}
 
     //Data
     for(int i_channel=0; i_channel<MAX_NUM_CHANNELS; i_channel++)
@@ -89,8 +97,13 @@ bool LoadBinaryFile::Execute()
             tmp_D = LoadData(i_channel);
             if(!tmp_D.empty() && !tmp_H.empty())
             {
-            m_data->TD.ParsedMap_Header.insert(std::pair<int,vector<unsigned int>>(i_channel,tmp_H));
-            m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(i_channel,tmp_D));
+                m_data->TD.ParsedMap_Header.insert(std::pair<int,vector<unsigned int>>(i_channel,tmp_H));
+                m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(i_channel,tmp_D));
+            }else
+            {
+                //if(m_verbose<=1){std::cout<<std::endl;}
+                std::cout << "Reached EOF for channel " << i_channel << std::endl;
+                m_data->TD.Stop = true;
             }
         }else
         {
@@ -109,6 +122,11 @@ bool LoadBinaryFile::Execute()
         {
             m_data->TD.ParsedMap_Header.insert(std::pair<int,vector<unsigned int>>(o_channel,tmp_H));
             m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(o_channel,tmp_D));
+        }else
+        {
+            //if(m_verbose<=1){std::cout<<std::endl;}
+            std::cout << "Reached EOF for channel " << o_channel << std::endl;
+            m_data->TD.Stop = true;
         }
     }else
     {
@@ -126,6 +144,11 @@ bool LoadBinaryFile::Execute()
         {
             m_data->TD.ParsedMap_Header.insert(std::pair<int,vector<unsigned int>>(o_channel,tmp_H));
             m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(o_channel,tmp_D));
+        }else
+        {
+            //if(m_verbose<=1){std::cout<<std::endl;}
+            std::cout << "Reached EOF for channel " << o_channel << std::endl;
+            m_data->TD.Stop = true;
         }
     }else
     {
@@ -160,10 +183,25 @@ vector<unsigned int> LoadBinaryFile::LoadHeader(int i_channel)
     int buffersize = words_in_header * bytes_in_headerword;
     char buffer[buffersize];
 
-    if (!m_data->TD.FileMap[i_channel].read(buffer, buffersize)) 
+    m_data->TD.FileMap[i_channel].read(buffer, buffersize);
+    if(m_data->TD.FileMap[i_channel].fail()) 
     {
-        std::cerr << "Error occurred while reading the file for channel " << i_channel << std::endl;
         return {};
+    }else if(m_data->TD.FileMap[i_channel].bad())
+    {
+        std::cerr << "Non-recoverable read error occurred while reading the file for channel " << i_channel << std::endl;
+        return {};
+    }else if(m_data->TD.FileMap[i_channel].eof())
+    {
+        if (m_data->TD.FileMap[i_channel].gcount() == 0) 
+        {
+            std::cerr << "Premature EOF reading the file for channel " << i_channel << std::endl;
+            return {};
+        }else 
+        {
+            std::cerr << "EOF reading the file for channel " << i_channel << " after " << m_data->TD.FileMap[i_channel].gcount() << " bytes." << std::endl;
+            return {};
+        }
     }
 
     int numFloats = buffersize / sizeof(unsigned int);
@@ -185,10 +223,25 @@ vector<float> LoadBinaryFile::LoadData(int i_channel)
     int buffersize = words_in_data * bytes_in_dataword;
     char buffer[buffersize];
 
-    if(!m_data->TD.FileMap[i_channel].read(buffer, buffersize)) 
+    m_data->TD.FileMap[i_channel].read(buffer, buffersize);
+    if(m_data->TD.FileMap[i_channel].fail()) 
     {
-        std::cerr << "Error occurred while reading the file." << std::endl;
         return {};
+    }else if(m_data->TD.FileMap[i_channel].bad())
+    {
+        std::cerr << "Non-recoverable read error occurred while reading the file for channel " << i_channel << std::endl;
+        return {};
+    }else if(m_data->TD.FileMap[i_channel].eof())
+    {
+        if (m_data->TD.FileMap[i_channel].gcount() == 0) 
+        {
+            std::cerr << "Premature EOF reading the file for channel " << i_channel << std::endl;
+            return {};
+        }else 
+        {
+            std::cerr << "EOF reading the file for channel " << i_channel << " after " << m_data->TD.FileMap[i_channel].gcount() << " bytes." << std::endl;
+            return {};
+        }
     }
 
     int numFloats = buffersize / sizeof(float);

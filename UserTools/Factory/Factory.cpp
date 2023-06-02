@@ -8,6 +8,7 @@ if (tool=="DummyTool") ret=new DummyTool;
 if (tool=="LoadBinaryFile") ret=new LoadBinaryFile;
 if (tool=="StoreEvent") ret=new StoreEvent;
 if (tool=="BaselineSubstraction") ret=new BaselineSubstraction;
-  if (tool=="PulseIdentifier") ret=new PulseIdentifier;
+if (tool=="PulseIdentifier") ret=new PulseIdentifier;
+  if (tool=="GetPhDistribution") ret=new GetPhDistribution;
 return ret;
 }
