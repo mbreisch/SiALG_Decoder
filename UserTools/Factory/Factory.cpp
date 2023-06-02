@@ -5,8 +5,9 @@ Tool* ret=0;
 
 // if (tool=="Type") tool=new Type;
 if (tool=="DummyTool") ret=new DummyTool;
-if (tool=="GetEvent") ret=new GetEvent;
 if (tool=="LoadBinaryFile") ret=new LoadBinaryFile;
 if (tool=="StoreEvent") ret=new StoreEvent;
+if (tool=="BaselineSubstraction") ret=new BaselineSubstraction;
+  if (tool=="PulseIdentifier") ret=new PulseIdentifier;
 return ret;
 }

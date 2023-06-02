@@ -34,6 +34,12 @@ class TemporaryData{
     int Runtime;
     bool Stop;
 
+    TFile* RootFile_Event;
+    TTree *TTree_Event;
+
+    TFile* RootFile_Analysis;
+    TTree *TTree_Analysis_Charge;
+
  private:
  
 };

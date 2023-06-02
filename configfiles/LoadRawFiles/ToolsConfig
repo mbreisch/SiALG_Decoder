@@ -1,2 +1,6 @@
 LoadBinaryFile LoadBinaryFile configfiles/LoadRawFiles/ReadFile
+BaselineSubstraction BaselineSubstraction configfiles/LoadRawFiles/ReadFile
+#PulseIdentifier PulseIdentifier configfiles/LoadRawFiles/ReadFile
 StoreEvent StoreEvent configfiles/LoadRawFiles/ReadFile
+
+#Anastuff

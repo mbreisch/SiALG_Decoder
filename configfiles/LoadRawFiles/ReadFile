@@ -1,8 +1,8 @@
 verbose 1
-Runtime 1
+Runtime 100
 
-Path_In /mnt/s/Data/T1/
-Path_Out /mnt/s/Data/T1/
+Path_In /mnt/s/Data/FirstData/
+Path_Out /mnt/s/Data/FirstData/
 File_Prefix wave_
 File_Sufix .dat
 

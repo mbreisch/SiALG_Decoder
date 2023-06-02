@@ -17,66 +17,66 @@ bool StoreEvent::Initialise(std::string configfile, DataModel &data)
 
     //Generate the rootfile
     std::string savelocation = m_data->TD.Path_Out+ "RawData.root";
-    RootFile = new TFile(savelocation.c_str(),"RECREATE");
-    TTree_Event = new TTree("Event", "Event");
-    TTree_Event->Branch("EventID", &EventID, "EventID/I");
+    m_data->TD.RootFile_Event = new TFile(savelocation.c_str(),"RECREATE");
+    m_data->TD.TTree_Event = new TTree("Event", "Event");
+    m_data->TD.TTree_Event->Branch("EventID", &EventID, "EventID/I");
 
-    TTree_Event->Branch("Header_ch0", &Header_ch0);
-    TTree_Event->Branch("Data_ch0", &Data_ch0);
+    m_data->TD.TTree_Event->Branch("Header_ch0", &Header_ch0);
+    m_data->TD.TTree_Event->Branch("Data_ch0", &Data_ch0);
 
-    TTree_Event->Branch("Header_ch1", &Header_ch1);
-    TTree_Event->Branch("Data_ch1", &Data_ch1);
+    m_data->TD.TTree_Event->Branch("Header_ch1", &Header_ch1);
+    m_data->TD.TTree_Event->Branch("Data_ch1", &Data_ch1);
 
-    TTree_Event->Branch("Header_ch2", &Header_ch2);
-    TTree_Event->Branch("Data_ch2", &Data_ch2);
+    m_data->TD.TTree_Event->Branch("Header_ch2", &Header_ch2);
+    m_data->TD.TTree_Event->Branch("Data_ch2", &Data_ch2);
     
-    TTree_Event->Branch("Header_ch3", &Header_ch3);
-    TTree_Event->Branch("Data_ch3", &Data_ch3);
+    m_data->TD.TTree_Event->Branch("Header_ch3", &Header_ch3);
+    m_data->TD.TTree_Event->Branch("Data_ch3", &Data_ch3);
 
-    TTree_Event->Branch("Header_ch4", &Header_ch4);
-    TTree_Event->Branch("Data_ch4", &Data_ch4);
+    m_data->TD.TTree_Event->Branch("Header_ch4", &Header_ch4);
+    m_data->TD.TTree_Event->Branch("Data_ch4", &Data_ch4);
 
-    TTree_Event->Branch("Header_ch5", &Header_ch5);
-    TTree_Event->Branch("Data_ch5", &Data_ch5);
+    m_data->TD.TTree_Event->Branch("Header_ch5", &Header_ch5);
+    m_data->TD.TTree_Event->Branch("Data_ch5", &Data_ch5);
 
-    TTree_Event->Branch("Header_ch5", &Header_ch5);
-    TTree_Event->Branch("Data_ch5", &Data_ch5);
+    m_data->TD.TTree_Event->Branch("Header_ch5", &Header_ch5);
+    m_data->TD.TTree_Event->Branch("Data_ch5", &Data_ch5);
     
-    TTree_Event->Branch("Header_ch6", &Header_ch6);
-    TTree_Event->Branch("Data_ch6", &Data_ch6);
+    m_data->TD.TTree_Event->Branch("Header_ch6", &Header_ch6);
+    m_data->TD.TTree_Event->Branch("Data_ch6", &Data_ch6);
     
-    TTree_Event->Branch("Header_ch7", &Header_ch7);
-    TTree_Event->Branch("Data_ch7", &Data_ch7);
+    m_data->TD.TTree_Event->Branch("Header_ch7", &Header_ch7);
+    m_data->TD.TTree_Event->Branch("Data_ch7", &Data_ch7);
 
-    TTree_Event->Branch("Header_ch8", &Header_ch8);
-    TTree_Event->Branch("Data_ch8", &Data_ch8);
+    m_data->TD.TTree_Event->Branch("Header_ch8", &Header_ch8);
+    m_data->TD.TTree_Event->Branch("Data_ch8", &Data_ch8);
 
-    TTree_Event->Branch("Header_ch9", &Header_ch9);
-    TTree_Event->Branch("Data_ch9", &Data_ch9);
+    m_data->TD.TTree_Event->Branch("Header_ch9", &Header_ch9);
+    m_data->TD.TTree_Event->Branch("Data_ch9", &Data_ch9);
     
-    TTree_Event->Branch("Header_ch10", &Header_ch10);
-    TTree_Event->Branch("Data_ch10", &Data_ch10);
+    m_data->TD.TTree_Event->Branch("Header_ch10", &Header_ch10);
+    m_data->TD.TTree_Event->Branch("Data_ch10", &Data_ch10);
 
-    TTree_Event->Branch("Header_ch11", &Header_ch11);
-    TTree_Event->Branch("Data_ch11", &Data_ch11);
+    m_data->TD.TTree_Event->Branch("Header_ch11", &Header_ch11);
+    m_data->TD.TTree_Event->Branch("Data_ch11", &Data_ch11);
 
-    TTree_Event->Branch("Header_ch12", &Header_ch12);
-    TTree_Event->Branch("Data_ch12", &Data_ch12);
+    m_data->TD.TTree_Event->Branch("Header_ch12", &Header_ch12);
+    m_data->TD.TTree_Event->Branch("Data_ch12", &Data_ch12);
 
-    TTree_Event->Branch("Header_ch13", &Header_ch13);
-    TTree_Event->Branch("Data_ch13", &Data_ch13);
+    m_data->TD.TTree_Event->Branch("Header_ch13", &Header_ch13);
+    m_data->TD.TTree_Event->Branch("Data_ch13", &Data_ch13);
     
-    TTree_Event->Branch("Header_ch14", &Header_ch14);
-    TTree_Event->Branch("Data_ch14", &Data_ch14);
+    m_data->TD.TTree_Event->Branch("Header_ch14", &Header_ch14);
+    m_data->TD.TTree_Event->Branch("Data_ch14", &Data_ch14);
 
-    TTree_Event->Branch("Header_ch15", &Header_ch15);
-    TTree_Event->Branch("Data_ch15", &Data_ch15);
+    m_data->TD.TTree_Event->Branch("Header_ch15", &Header_ch15);
+    m_data->TD.TTree_Event->Branch("Data_ch15", &Data_ch15);
 
-    TTree_Event->Branch("Trigger_header_g0", &Trigger_header_g0);
-    TTree_Event->Branch("Trigger_data_g0", &Trigger_data_g0);
+    m_data->TD.TTree_Event->Branch("Trigger_header_g0", &Trigger_header_g0);
+    m_data->TD.TTree_Event->Branch("Trigger_data_g0", &Trigger_data_g0);
 
-    TTree_Event->Branch("Trigger_header_g1", &Trigger_header_g1);
-    TTree_Event->Branch("Trigger_data_g1", &Trigger_data_g1);
+    m_data->TD.TTree_Event->Branch("Trigger_header_g1", &Trigger_header_g1);
+    m_data->TD.TTree_Event->Branch("Trigger_data_g1", &Trigger_data_g1);
 
     return true;
 }
@@ -138,9 +138,10 @@ bool StoreEvent::Execute()
     Trigger_data_g0 = m_data->TD.ParsedMap_Data[16];
     Trigger_data_g1 = m_data->TD.ParsedMap_Data[17];
 
-    TTree_Event->Fill();
-    TTree_Event->Write();
-    TTree_Event->Reset();
+    m_data->TD.RootFile_Event->cd();
+    m_data->TD.TTree_Event->Fill();
+    m_data->TD.TTree_Event->Write();
+    m_data->TD.TTree_Event->Reset();
 
     return true;
 }
@@ -148,9 +149,10 @@ bool StoreEvent::Execute()
 
 bool StoreEvent::Finalise()
 {
-    RootFile->Close();
-    delete RootFile;
-    RootFile = 0;
+    m_data->TD.RootFile_Event->cd();
+    m_data->TD.RootFile_Event->Close();
+    delete m_data->TD.RootFile_Event;
+    m_data->TD.RootFile_Event = 0;
     return true;
 }
 

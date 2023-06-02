@@ -32,8 +32,6 @@ class StoreEvent: public Tool
     bool Finalise(); ///< Finalise funciton used to clean up resorces.
 
     std::string Path_Out;
-    TFile* RootFile;
-    TTree *TTree_Event;
 
     std::vector<unsigned int> Header_ch0,Header_ch1,Header_ch2,Header_ch3,Header_ch4,Header_ch5,Header_ch6,Header_ch7,Header_ch8,
         Header_ch9,Header_ch10,Header_ch11,Header_ch12,Header_ch13,Header_ch14,Header_ch15; 
