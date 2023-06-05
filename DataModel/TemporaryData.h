@@ -32,16 +32,17 @@ class TemporaryData{
     map<int,vector<int>> PeakPositions;
     map<int,vector<float>> PeakMinima;
 
+    vector<int> ListOfChannels;
+
     int EventCounter;
     int Runtime;
     bool Stop;
 
     TFile* RootFile_Event;
     TTree *TTree_Event;
-    TTree *TTree_Analysis;
 
     TFile* RootFile_Analysis;
-    TTree *TTree_Analysis_Charge;
+    TTree *TTree_Analysis_PHD;
 
  private:
  

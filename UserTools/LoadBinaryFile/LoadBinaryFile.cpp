@@ -37,6 +37,7 @@ bool LoadBinaryFile::Initialise(std::string configfile, DataModel &data)
             std::cout << "Channel " << i_channel << " not found" << std::endl;
             continue;
         }
+        m_data->TD.ListOfChannels.push_back(i_channel);
         m_data->TD.FileMap.insert(std::make_pair(i_channel, std::move(tmpfile)));
         tmpfile.close();
     }
@@ -46,20 +47,27 @@ bool LoadBinaryFile::Initialise(std::string configfile, DataModel &data)
     if(!tmpfile2) 
     {
         std::cout << "Channel Trigger 0 not found" << std::endl;
+    }else
+    {
+        m_data->TD.ListOfChannels.push_back(16);
+        m_data->TD.FileMap.insert(std::make_pair(16, std::move(tmpfile2)));
+        tmpfile2.close();
     }
-    m_data->TD.FileMap.insert(std::make_pair(16, std::move(tmpfile2)));
-    tmpfile2.close();
+
     std::cout<<"Loading trigger 1 files"<<std::endl;
     FullFilePath = m_data->TD.Path_In + Trigger_1;
     ifstream tmpfile3(FullFilePath, std::ios::binary);
     if(!tmpfile3) 
     {
         std::cout << "Channel Trigger 1 not found" << std::endl;
+    }else
+    {
+        m_data->TD.ListOfChannels.push_back(17);
+        m_data->TD.FileMap.insert(std::make_pair(17, std::move(tmpfile2)));
+        tmpfile3.close();
     }
-    m_data->TD.FileMap.insert(std::make_pair(17, std::move(tmpfile3)));
-    tmpfile3.close();
 
-    std::cout << "Got " << m_data->TD.FileMap.size() << " to read out" << std::endl;
+    std::cout << "Got " << m_data->TD.ListOfChannels.size() << " channels to read out" << std::endl;
 
     m_data->TD.EventCounter = 0;
     
@@ -89,7 +97,7 @@ bool LoadBinaryFile::Execute()
     else{std::cout << "\rStarting with event " << m_data->TD.EventCounter+1 << "                   " << std::flush;}
 
     //Data
-    for(int i_channel=0; i_channel<MAX_NUM_CHANNELS; i_channel++)
+    for(int i_channel: m_data->TD.ListOfChannels)
     {
         if(!m_data->TD.FileMap[i_channel].eof())
         {
@@ -101,7 +109,6 @@ bool LoadBinaryFile::Execute()
                 m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(i_channel,tmp_D));
             }else
             {
-                //if(m_verbose<=1){std::cout<<std::endl;}
                 std::cout << "Reached EOF for channel " << i_channel << std::endl;
                 m_data->TD.Stop = true;
             }
@@ -110,50 +117,6 @@ bool LoadBinaryFile::Execute()
             std::cout << "Reached EOF for channel " << i_channel << std::endl;
             m_data->TD.Stop = true;
         }
-    }
-
-    //Trigger 0
-    int o_channel = 16;
-    if(!m_data->TD.FileMap[o_channel].eof())
-    {
-        tmp_H = LoadHeader(o_channel);
-        tmp_D = LoadData(o_channel);
-        if(!tmp_D.empty() && !tmp_H.empty())
-        {
-            m_data->TD.ParsedMap_Header.insert(std::pair<int,vector<unsigned int>>(o_channel,tmp_H));
-            m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(o_channel,tmp_D));
-        }else
-        {
-            //if(m_verbose<=1){std::cout<<std::endl;}
-            std::cout << "Reached EOF for channel " << o_channel << std::endl;
-            m_data->TD.Stop = true;
-        }
-    }else
-    {
-        std::cout << "Reached EOF for channel " << o_channel << std::endl;
-        m_data->TD.Stop = true;
-    }
-
-    //Trigger 1
-    o_channel = 17;
-    if(!m_data->TD.FileMap[o_channel].eof())
-    {
-        tmp_H = LoadHeader(o_channel);
-        tmp_D = LoadData(o_channel);
-        if(!tmp_D.empty() && !tmp_H.empty())
-        {
-            m_data->TD.ParsedMap_Header.insert(std::pair<int,vector<unsigned int>>(o_channel,tmp_H));
-            m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(o_channel,tmp_D));
-        }else
-        {
-            //if(m_verbose<=1){std::cout<<std::endl;}
-            std::cout << "Reached EOF for channel " << o_channel << std::endl;
-            m_data->TD.Stop = true;
-        }
-    }else
-    {
-        std::cout << "Reached EOF for channel " << o_channel << std::endl;
-        m_data->TD.Stop = true;
     }
 
     if(!m_data->TD.Stop)
@@ -167,12 +130,11 @@ bool LoadBinaryFile::Execute()
 
 bool LoadBinaryFile::Finalise()
 {
-    for(int i_channel=0; i_channel<MAX_NUM_CHANNELS; i_channel++)
+    for(int i_channel: m_data->TD.ListOfChannels)
     {
         m_data->TD.FileMap[i_channel].close();
     }
-    m_data->TD.FileMap[16].close();
-    m_data->TD.FileMap[17].close();
+    m_data->TD.ListOfChannels.clear();
     m_data->TD.FileMap.clear();
 
     return true;

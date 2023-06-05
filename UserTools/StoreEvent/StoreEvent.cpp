@@ -18,6 +18,7 @@ bool StoreEvent::Initialise(std::string configfile, DataModel &data)
     //Generate the rootfile
     std::string savelocation = m_data->TD.Path_Out+ "RawData.root";
     m_data->TD.RootFile_Event = new TFile(savelocation.c_str(),"RECREATE");
+    m_data->TD.RootFile_Event->cd();
     m_data->TD.TTree_Event = new TTree("Event", "Event");
     m_data->TD.TTree_Event->Branch("EventID", &EventID, "EventID/I");
 
