@@ -12,7 +12,8 @@ bool GetPhDistribution::Initialise(std::string configfile, DataModel &data)
     m_log= m_data->Log;
 
     if(!m_variables.Get("verbose",m_verbose)) m_verbose=1;
-    if(!m_variables.Get("Path_Out",m_data->TD.Path_Out)) m_data->TD.Path_Out="./";
+    if(!m_variables.Get("ROI_low",ROI_low)) ROI_low=0;
+    if(!m_variables.Get("ROI_high",ROI_high)) ROI_high=1023;
 
     std::string savelocation = m_data->TD.Path_Out+ "Analysis.root";
     m_data->TD.RootFile_Analysis = new TFile(savelocation.c_str(),"RECREATE");
@@ -52,17 +53,22 @@ bool GetPhDistribution::Execute()
         return true;
     }
 
+
     for(int i_channel: m_data->TD.ListOfChannels)
     {
+        vector<float> InVector = GetSlicedDataFromROI(m_data->TD.ParsedMap_Data[i_channel],ROI_low,ROI_high);
         if(i_channel==16 || i_channel==17){continue;}
         if(m_data->TD.PeakPositions[i_channel].empty())
         {
-            m_data->TD.PeakMinima[i_channel].push_back(TMath::Mean(m_data->TD.ParsedMap_Data[i_channel].size(),m_data->TD.ParsedMap_Data[i_channel].data()));     
+            m_data->TD.PeakMinima[i_channel].push_back(TMath::MinElement(InVector.size(),InVector.data()));     
         }else
         {
             for(int pos: m_data->TD.PeakPositions[i_channel])
             {
-                m_data->TD.PeakMinima[i_channel].push_back(m_data->TD.ParsedMap_Data[i_channel][pos]);        
+                if(pos>=ROI_low && pos<=ROI_high)
+                {
+                    m_data->TD.PeakMinima[i_channel].push_back(m_data->TD.ParsedMap_Data[i_channel][pos]);        
+                }
             }
         }
     }
@@ -99,4 +105,19 @@ bool GetPhDistribution::Finalise()
     m_data->TD.RootFile_Analysis = 0;
 
     return true;
+}
+
+
+std::vector<float> GetPhDistribution::GetSlicedDataFromROI(vector<float> data, int startIndex, int endIndex)
+{
+    if (startIndex < 0 || endIndex > data.size() || startIndex >= endIndex)
+    {
+        // Invalid range, return an empty vector or handle the error as desired
+        return vector<float>();
+    }
+
+    // Create a new vector containing the desired slice
+    std::vector<float> slice(data.begin() + startIndex, data.begin() + endIndex);
+
+    return slice;
 }

@@ -39,7 +39,12 @@ class GetPhDistribution: public Tool
                     PusleHeight_Ch6,PusleHeight_Ch7,PusleHeight_Ch8,PusleHeight_Ch9,PusleHeight_Ch10,PusleHeight_Ch11,
                     PusleHeight_Ch12,PusleHeight_Ch13,PusleHeight_Ch14,PusleHeight_Ch15;
 
+    vector<float> GetSlicedDataFromROI(vector<float> data, int startIndex, int endIndex);
+
     private:
+        int ROI_low;
+        int ROI_high;
+
 
 };
 #endif

@@ -16,6 +16,7 @@ bool LoadBinaryFile::Initialise(std::string configfile, DataModel &data)
 
     //Get Path input and filename
     if(!m_variables.Get("Path_In",m_data->TD.Path_In)) m_data->TD.Path_In="./";
+    if(!m_variables.Get("Path_Out",m_data->TD.Path_Out)) m_data->TD.Path_Out=m_data->TD.Path_In;
     if(!m_variables.Get("File_Prefix",File_Prefix)) File_Prefix="wave_";
     if(!m_variables.Get("File_Sufix",File_Sufix)) File_Sufix=".dat";
     if(!m_variables.Get("Trigger_0",Trigger_0)) Trigger_0="TR_0_0.dat";

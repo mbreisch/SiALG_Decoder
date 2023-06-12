@@ -1,8 +1,8 @@
 verbose 1
-Runtime -1
+Runtime 10000
 
 Path_In /mnt/s/Data/SecData/
-Path_Out /mnt/s/Data/SecData/
+#Path_Out /mnt/s/Data/SecData/
 File_Prefix wave_
 File_Sufix .dat
 
@@ -16,3 +16,6 @@ bytes_in_dataword 4
 
 threshold -4.0
 width 10
+
+ROI_low 200
+ROI_high 500

@@ -13,8 +13,6 @@ bool StoreEvent::Initialise(std::string configfile, DataModel &data)
 
     if(!m_variables.Get("verbose",m_verbose)) m_verbose=1;
 
-    if(!m_variables.Get("Path_Out",m_data->TD.Path_Out)) m_data->TD.Path_Out="./";
-
     //Generate the rootfile
     std::string savelocation = m_data->TD.Path_Out+ "RawData.root";
     m_data->TD.RootFile_Event = new TFile(savelocation.c_str(),"RECREATE");
