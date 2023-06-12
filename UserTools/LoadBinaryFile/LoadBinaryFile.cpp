@@ -27,46 +27,49 @@ bool LoadBinaryFile::Initialise(std::string configfile, DataModel &data)
     if(!m_variables.Get("words_in_header",words_in_header)) words_in_header=0;
     if(!m_variables.Get("bytes_in_headerword",bytes_in_headerword)) bytes_in_headerword=0;
 
-    std::cout<<"Loading data files"<<std::endl;
+    std::cout<<"Loading data files:"<<std::endl;
+    std::cout<<"-------------------"<<std::endl;
     for(int i_channel=0; i_channel<MAX_NUM_CHANNELS; i_channel++)
     {
         FullFilePath = m_data->TD.Path_In + File_Prefix + std::to_string(i_channel) + File_Sufix;
         ifstream tmpfile(FullFilePath, std::ios::binary);
         if(!tmpfile) 
         {
-            std::cout << "Channel " << i_channel << " not found" << std::endl;
+            std::cout << "\033[1;31m>> Channel " << i_channel << " not found\033[0m" << std::endl;
             continue;
         }
+        std::cout << "\033[1;32m>> Channel " << i_channel << " found\033[0m" << std::endl;
         m_data->TD.ListOfChannels.push_back(i_channel);
         m_data->TD.FileMap.insert(std::make_pair(i_channel, std::move(tmpfile)));
         tmpfile.close();
     }
-    std::cout<<"Loading trigger 0 files"<<std::endl;
+
     FullFilePath = m_data->TD.Path_In + Trigger_0;
     ifstream tmpfile2(FullFilePath, std::ios::binary);
     if(!tmpfile2) 
     {
-        std::cout << "Channel Trigger 0 not found" << std::endl;
+        std::cout << "\033[1;31m>> Channel Trigger 0 not found\033[0m" << std::endl;
     }else
     {
+        std::cout << "\033[1;32m>> Channel Trigger 0 found\033[0m" << std::endl;
         m_data->TD.ListOfChannels.push_back(16);
         m_data->TD.FileMap.insert(std::make_pair(16, std::move(tmpfile2)));
         tmpfile2.close();
     }
 
-    std::cout<<"Loading trigger 1 files"<<std::endl;
     FullFilePath = m_data->TD.Path_In + Trigger_1;
     ifstream tmpfile3(FullFilePath, std::ios::binary);
     if(!tmpfile3) 
     {
-        std::cout << "Channel Trigger 1 not found" << std::endl;
+        std::cout << "\033[1;31m>> Channel Trigger 1 not found\033[0m" << std::endl;
     }else
     {
+        std::cout << "\033[1;32m>> Channel Trigger 1 found\033[0m" << std::endl;
         m_data->TD.ListOfChannels.push_back(17);
-        m_data->TD.FileMap.insert(std::make_pair(17, std::move(tmpfile2)));
+        m_data->TD.FileMap.insert(std::make_pair(17, std::move(tmpfile3)));
         tmpfile3.close();
     }
-
+    std::cout<<"-------------------"<<std::endl;
     std::cout << "Got " << m_data->TD.ListOfChannels.size() << " channels to read out" << std::endl;
 
     m_data->TD.EventCounter = 0;
@@ -109,12 +112,12 @@ bool LoadBinaryFile::Execute()
                 m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(i_channel,tmp_D));
             }else
             {
-                std::cout << "Reached EOF for channel " << i_channel << std::endl;
+                std::cout << "Reached EOF 1 for channel " << i_channel << std::endl;
                 m_data->TD.Stop = true;
             }
         }else
         {
-            std::cout << "Reached EOF for channel " << i_channel << std::endl;
+            std::cout << "Reached EOF 2 for channel " << i_channel << std::endl;
             m_data->TD.Stop = true;
         }
     }
