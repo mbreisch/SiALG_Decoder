@@ -14,8 +14,6 @@ bool StoreEvent::Initialise(std::string configfile, DataModel &data)
     if(!m_variables.Get("verbose",m_verbose)) m_verbose=1;
 
     //Generate the rootfile
-    std::string savelocation = m_data->TD.Path_Out+ "RawData.root";
-    m_data->TD.RootFile_Event = new TFile(savelocation.c_str(),"RECREATE");
     m_data->TD.RootFile_Event->cd();
     m_data->TD.TTree_Event = new TTree("Event", "Event");
     m_data->TD.TTree_Event->Branch("EventID", &EventID, "EventID/I");
@@ -100,8 +98,7 @@ bool StoreEvent::Execute()
 {
     if(m_data->TD.Stop==true)
     {
-        std::cout << "Stopping loop now!" << std::endl;
-        m_data->vars.Set("StopLoop",1);
+        std::cout <<"Stop has been called, skipping Store"<<std::endl;
         return true;
     }
 
@@ -186,10 +183,6 @@ bool StoreEvent::Execute()
 
 bool StoreEvent::Finalise()
 {
-    m_data->TD.RootFile_Event->cd();
-    m_data->TD.RootFile_Event->Close();
-    delete m_data->TD.RootFile_Event;
-    m_data->TD.RootFile_Event = 0;
     return true;
 }
 

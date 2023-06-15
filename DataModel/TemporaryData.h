@@ -31,6 +31,7 @@ class TemporaryData{
     map<int,vector<float>> ParsedMap_Data;
     map<int,vector<int>> PeakPositions;
     map<int,vector<float>> PeakMinima;
+    map<int,vector<float>> TTS_Map;
 
     vector<int> ListOfChannels;
 
@@ -43,6 +44,7 @@ class TemporaryData{
 
     TFile* RootFile_Analysis;
     TTree *TTree_Analysis_PHD;
+    TTree *TTree_Analysis_TTS;
 
  private:
  

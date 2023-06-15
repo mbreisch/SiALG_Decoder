@@ -1,7 +1,11 @@
 LoadBinaryFile LoadBinaryFile configfiles/LoadRawFiles/ReadFile
 BaselineSubstraction BaselineSubstraction configfiles/LoadRawFiles/ReadFile
 PulseIdentifier PulseIdentifier configfiles/LoadRawFiles/ReadFile
-GetPhDistribution GetPhDistribution configfiles/LoadRawFiles/ReadFile
 StoreEvent StoreEvent configfiles/LoadRawFiles/ReadFile
 
 #Anastuff
+GetPhDistribution GetPhDistribution configfiles/LoadRawFiles/Options_PHD
+GetTTS GetTTS configfiles/LoadRawFiles/Options_TTS
+
+#End
+EndChain EndChain configfiles/LoadRawFiles/ReadFile

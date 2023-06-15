@@ -1,21 +1,26 @@
 verbose 1
-Runtime 10000
 
+# Runtime -1=All, 1-N=N number of events
+Runtime -1
+
+# Path options, if Path_Out is not given it will use Path_In
 Path_In /mnt/s/Data/SecData/
 #Path_Out /mnt/s/Data/SecData/
+
+# File name options
 File_Prefix wave_
 File_Sufix .dat
-
 Trigger_0 Tr_0_0.dat
 Trigger_1 Tr_0_1.dat
 
+# Data size and words for binary files
 words_in_header 8
 bytes_in_headerword 4
 words_in_data 1024
 bytes_in_dataword 4
 
-threshold -4.0
+# PulseIdentifier
+threshold -11.0
 width 10
-
 ROI_low 200
 ROI_high 500

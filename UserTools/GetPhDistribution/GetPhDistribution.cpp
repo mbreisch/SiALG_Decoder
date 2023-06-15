@@ -15,32 +15,26 @@ bool GetPhDistribution::Initialise(std::string configfile, DataModel &data)
     if(!m_variables.Get("ROI_low",ROI_low)) ROI_low=0;
     if(!m_variables.Get("ROI_high",ROI_high)) ROI_high=1023;
 
-    std::string savelocation = m_data->TD.Path_Out+ "Analysis.root";
-    m_data->TD.RootFile_Analysis = new TFile(savelocation.c_str(),"RECREATE");
+
     m_data->TD.RootFile_Analysis->cd();
     m_data->TD.TTree_Analysis_PHD = new TTree("TTree_Analysis_PHD", "TTree_Analysis_PHD");
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch0", &PusleHeight_Ch0);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch1", &PusleHeight_Ch1);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch2", &PusleHeight_Ch2);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch3", &PusleHeight_Ch3);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch4", &PusleHeight_Ch4);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch5", &PusleHeight_Ch5);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch6", &PusleHeight_Ch6);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch7", &PusleHeight_Ch7);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch8", &PusleHeight_Ch8);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch9", &PusleHeight_Ch9);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch10", &PusleHeight_Ch10);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch11", &PusleHeight_Ch11);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch12", &PusleHeight_Ch12);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch13", &PusleHeight_Ch13);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch14", &PusleHeight_Ch14);
-    m_data->TD.TTree_Analysis_PHD->Branch("PusleHeight_Ch15", &PusleHeight_Ch15);        
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch0", &PulseHeight_Ch0);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch1", &PulseHeight_Ch1);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch2", &PulseHeight_Ch2);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch3", &PulseHeight_Ch3);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch4", &PulseHeight_Ch4);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch5", &PulseHeight_Ch5);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch6", &PulseHeight_Ch6);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch7", &PulseHeight_Ch7);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch8", &PulseHeight_Ch8);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch9", &PulseHeight_Ch9);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch10", &PulseHeight_Ch10);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch11", &PulseHeight_Ch11);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch12", &PulseHeight_Ch12);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch13", &PulseHeight_Ch13);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch14", &PulseHeight_Ch14);
+    m_data->TD.TTree_Analysis_PHD->Branch("PulseHeight_Ch15", &PulseHeight_Ch15);        
 
-    for(int i_channel: m_data->TD.ListOfChannels)
-    {
-        if(i_channel==16 || i_channel==17){continue;}
-        m_data->TD.PeakMinima.insert(std::pair<int,vector<float>>(i_channel,{}));
-    }
     return true;
 }
 
@@ -52,7 +46,6 @@ bool GetPhDistribution::Execute()
         std::cout <<"Stop has been called, skipping Pulseheight calculator"<<std::endl;
         return true;
     }
-
 
     for(int i_channel: m_data->TD.ListOfChannels)
     {
@@ -79,30 +72,26 @@ bool GetPhDistribution::Execute()
 
 bool GetPhDistribution::Finalise()
 {
-    PusleHeight_Ch0 = m_data->TD.PeakMinima[0];
-    PusleHeight_Ch1 = m_data->TD.PeakMinima[1];
-    PusleHeight_Ch2 = m_data->TD.PeakMinima[2];
-    PusleHeight_Ch3 = m_data->TD.PeakMinima[3];
-    PusleHeight_Ch4 = m_data->TD.PeakMinima[4];
-    PusleHeight_Ch5 = m_data->TD.PeakMinima[5];
-    PusleHeight_Ch6 = m_data->TD.PeakMinima[6];
-    PusleHeight_Ch7 = m_data->TD.PeakMinima[7];
-    PusleHeight_Ch8 = m_data->TD.PeakMinima[8];
-    PusleHeight_Ch9 = m_data->TD.PeakMinima[9];
-    PusleHeight_Ch10 = m_data->TD.PeakMinima[10];
-    PusleHeight_Ch11 = m_data->TD.PeakMinima[11];
-    PusleHeight_Ch12 = m_data->TD.PeakMinima[12];
-    PusleHeight_Ch13 = m_data->TD.PeakMinima[13];
-    PusleHeight_Ch14 = m_data->TD.PeakMinima[14];
-    PusleHeight_Ch15 = m_data->TD.PeakMinima[15];
+    PulseHeight_Ch0 = m_data->TD.PeakMinima[0];
+    PulseHeight_Ch1 = m_data->TD.PeakMinima[1];
+    PulseHeight_Ch2 = m_data->TD.PeakMinima[2];
+    PulseHeight_Ch3 = m_data->TD.PeakMinima[3];
+    PulseHeight_Ch4 = m_data->TD.PeakMinima[4];
+    PulseHeight_Ch5 = m_data->TD.PeakMinima[5];
+    PulseHeight_Ch6 = m_data->TD.PeakMinima[6];
+    PulseHeight_Ch7 = m_data->TD.PeakMinima[7];
+    PulseHeight_Ch8 = m_data->TD.PeakMinima[8];
+    PulseHeight_Ch9 = m_data->TD.PeakMinima[9];
+    PulseHeight_Ch10 = m_data->TD.PeakMinima[10];
+    PulseHeight_Ch11 = m_data->TD.PeakMinima[11];
+    PulseHeight_Ch12 = m_data->TD.PeakMinima[12];
+    PulseHeight_Ch13 = m_data->TD.PeakMinima[13];
+    PulseHeight_Ch14 = m_data->TD.PeakMinima[14];
+    PulseHeight_Ch15 = m_data->TD.PeakMinima[15];
 
     m_data->TD.RootFile_Analysis->cd();
     m_data->TD.TTree_Analysis_PHD->Fill();
     m_data->TD.TTree_Analysis_PHD->Write();
-
-    m_data->TD.RootFile_Analysis->Close();
-    delete m_data->TD.RootFile_Analysis;
-    m_data->TD.RootFile_Analysis = 0;
 
     return true;
 }

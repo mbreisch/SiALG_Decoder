@@ -1,0 +1,6 @@
+verbose 1
+
+ROI_low 200
+ROI_high 500
+
+threshold_multiplier 0.8

@@ -75,6 +75,11 @@ bool LoadBinaryFile::Initialise(std::string configfile, DataModel &data)
 
     m_data->TD.EventCounter = 0;
     
+    std::string savelocation = m_data->TD.Path_Out+ "Analysis.root";
+    m_data->TD.RootFile_Analysis = new TFile(savelocation.c_str(),"RECREATE");
+    
+    savelocation = m_data->TD.Path_Out+ "RawData.root";
+    m_data->TD.RootFile_Event = new TFile(savelocation.c_str(),"RECREATE");
     return true;
 }
 

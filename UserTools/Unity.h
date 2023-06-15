@@ -4,3 +4,6 @@
 #include "BaselineSubstraction.h"
 #include "PulseIdentifier.h"
 #include "GetPhDistribution.h"
+
+#include "GetTTS.h"
+#include "EndChain.h"
