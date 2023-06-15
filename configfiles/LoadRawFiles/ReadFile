@@ -1,7 +1,7 @@
 verbose 1
 
 # Runtime -1=All, 1-N=N number of events
-Runtime -1
+Runtime 100
 
 # Path options, if Path_Out is not given it will use Path_In
 Path_In /mnt/s/Data/SecData/

@@ -141,7 +141,11 @@ bool LoadBinaryFile::Finalise()
 {
     for(int i_channel: m_data->TD.ListOfChannels)
     {
-        m_data->TD.FileMap[i_channel].close();
+        std::cout << "Closing file for channel " << i_channel << std::endl;
+        if(m_data->TD.FileMap[i_channel].is_open())
+        {
+            m_data->TD.FileMap[i_channel].close();
+        }
     }
     m_data->TD.ListOfChannels.clear();
     m_data->TD.FileMap.clear();
