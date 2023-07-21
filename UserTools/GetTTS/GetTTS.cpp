@@ -114,6 +114,14 @@ Double_t GaussianWA(Double_t *x, Double_t *par)
     return (amp / (TMath::Sqrt(2.0 * TMath::Pi())*sigma)) * TMath::Exp(-0.5 * TMath::Power((x[0] - mean) / sigma, 2));
 }
 
+Double_t sigmoid(Double_t *x, Double_t *par) {
+  Double_t t = x[0];
+  Double_t x0 = par[0];
+  Double_t s = par[1];
+  Double_t a = par[2];
+  Double_t y = 1.0 / (1.0 + TMath::Exp((x0 - t) / s));
+  return a * y;
+}
 
 float GetTTS::GetTriggerThreshold(int trg_ch)
 {
@@ -139,38 +147,33 @@ float GetTTS::GetTriggerThreshold(int trg_ch)
     } 
 
     // Create a TF1 object using the fitting function and set initial parameter values
-    TF1* fitFunc = new TF1("fitFunc", GaussianWA, min_pos-20, min_pos+5, 3);
-    fitFunc->SetParameters(TMath::Sqrt(2*TMath::Pi())*min_val, min_pos, 7.0); // Set initial parameter values
+    TF1* fitFunc = new TF1("fitFunc", sigmoid, min_pos-50, min_pos+5, 3);
+    fitFunc->SetParameters(min_pos,3,min_val); // Set initial parameter values
 
     // Fit the graph with the TF1 function
     graph->Fit(fitFunc, "RQ");
 
     // Access the fit parameters and their uncertainties
-    Double_t r_amplitude = fitFunc->GetParameter(0);
-    Double_t r_mean = fitFunc->GetParameter(1);
-    Double_t r_sigma = fitFunc->GetParameter(2);
+    Double_t r_x0 = fitFunc->GetParameter(0);
+    Double_t r_s0 = fitFunc->GetParameter(1);
+    Double_t r_a0 = fitFunc->GetParameter(2);
 
-    threshold_channel = threshold_multiplier*(r_amplitude/(TMath::Sqrt(2*TMath::Pi())*r_sigma));
+    threshold_channel = threshold_multiplier*r_a0;
 
     // Double_t amplitudeError = fitFunc->GetParError(0);
     // Double_t meanError = fitFunc->GetParError(1);
     // Double_t stddevError = fitFunc->GetParError(2);
 
-    float t1 = r_mean + TMath::Sqrt( - 2 * r_sigma*r_sigma * TMath::Log(TMath::Sqrt(2*TMath::Pi())*r_sigma*threshold_channel/r_amplitude));
-    float t2 = r_mean - TMath::Sqrt( - 2 * r_sigma*r_sigma * TMath::Log(TMath::Sqrt(2*TMath::Pi())*r_sigma*threshold_channel/r_amplitude));
+    TriggerThresholdChannel = r_x0 - r_s0 * TMath::Log(r_a0/threshold_channel-1);
 
-    if(t1>t2)
-    {
-        TriggerThresholdChannel = t2;
-    }else
-    {
-        TriggerThresholdChannel = t1;
-    }
 
     // Visualize the fit result
     // TCanvas* canvas = new TCanvas("canvas", "Fit Result");
     // graph->Draw("AP"); // Draw the original graph
     // fitFunc->Draw("same"); // Draw the fitted function on top
+    // canvas->Update();
+    // std::string name = m_data->TD.Path_Out+"Event_"+to_string(m_data->TD.EventCounter)+".png";
+    // canvas->SaveAs(name.c_str());  // Save the plot to a file
     // canvas->Draw();
     // app.Run();
 

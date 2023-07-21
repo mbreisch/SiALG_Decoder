@@ -46,6 +46,7 @@ class StoreEvent: public Tool
     int EventID;
 
     void printMap(const std::map<int, std::vector<std::vector<unsigned int>>>& myMap);
+    void InitRoot();
 
     private:
 

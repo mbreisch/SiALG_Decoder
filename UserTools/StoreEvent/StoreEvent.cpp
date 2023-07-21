@@ -13,83 +13,6 @@ bool StoreEvent::Initialise(std::string configfile, DataModel &data)
 
     if(!m_variables.Get("verbose",m_verbose)) m_verbose=1;
 
-    //Generate the rootfile
-    m_data->TD.RootFile_Event->cd();
-    m_data->TD.TTree_Event = new TTree("Event", "Event");
-    m_data->TD.TTree_Event->Branch("EventID", &EventID, "EventID/I");
-
-    m_data->TD.TTree_Event->Branch("Header_ch0", &Header_ch0);
-    m_data->TD.TTree_Event->Branch("Data_ch0", &Data_ch0);
-    m_data->TD.TTree_Event->Branch("Pulses_ch0", &Pulses_ch0);
-
-    m_data->TD.TTree_Event->Branch("Header_ch1", &Header_ch1);
-    m_data->TD.TTree_Event->Branch("Data_ch1", &Data_ch1);
-    m_data->TD.TTree_Event->Branch("Pulses_ch1", &Pulses_ch1);
-
-    m_data->TD.TTree_Event->Branch("Header_ch2", &Header_ch2);
-    m_data->TD.TTree_Event->Branch("Data_ch2", &Data_ch2);
-    m_data->TD.TTree_Event->Branch("Pulses_ch2", &Pulses_ch2);
-    
-    m_data->TD.TTree_Event->Branch("Header_ch3", &Header_ch3);
-    m_data->TD.TTree_Event->Branch("Data_ch3", &Data_ch3);
-    m_data->TD.TTree_Event->Branch("Pulses_ch3", &Pulses_ch3);
-
-    m_data->TD.TTree_Event->Branch("Header_ch4", &Header_ch4);
-    m_data->TD.TTree_Event->Branch("Data_ch4", &Data_ch4);
-    m_data->TD.TTree_Event->Branch("Pulses_ch4", &Pulses_ch4);
-
-    m_data->TD.TTree_Event->Branch("Header_ch5", &Header_ch5);
-    m_data->TD.TTree_Event->Branch("Data_ch5", &Data_ch5);
-    m_data->TD.TTree_Event->Branch("Pulses_ch5", &Pulses_ch5);
-    
-    m_data->TD.TTree_Event->Branch("Header_ch6", &Header_ch6);
-    m_data->TD.TTree_Event->Branch("Data_ch6", &Data_ch6);
-    m_data->TD.TTree_Event->Branch("Pulses_ch6", &Pulses_ch6);
-    
-    m_data->TD.TTree_Event->Branch("Header_ch7", &Header_ch7);
-    m_data->TD.TTree_Event->Branch("Data_ch7", &Data_ch7);
-    m_data->TD.TTree_Event->Branch("Pulses_ch7", &Pulses_ch7);
-
-    m_data->TD.TTree_Event->Branch("Header_ch8", &Header_ch8);
-    m_data->TD.TTree_Event->Branch("Data_ch8", &Data_ch8);
-    m_data->TD.TTree_Event->Branch("Pulses_ch8", &Pulses_ch8);
-
-    m_data->TD.TTree_Event->Branch("Header_ch9", &Header_ch9);
-    m_data->TD.TTree_Event->Branch("Data_ch9", &Data_ch9);
-    m_data->TD.TTree_Event->Branch("Pulses_ch9", &Pulses_ch9);
-    
-    m_data->TD.TTree_Event->Branch("Header_ch10", &Header_ch10);
-    m_data->TD.TTree_Event->Branch("Data_ch10", &Data_ch10);
-    m_data->TD.TTree_Event->Branch("Pulses_ch10", &Pulses_ch10);
-
-    m_data->TD.TTree_Event->Branch("Header_ch11", &Header_ch11);
-    m_data->TD.TTree_Event->Branch("Data_ch11", &Data_ch11);
-    m_data->TD.TTree_Event->Branch("Pulses_ch11", &Pulses_ch11);
-
-    m_data->TD.TTree_Event->Branch("Header_ch12", &Header_ch12);
-    m_data->TD.TTree_Event->Branch("Data_ch12", &Data_ch12);
-    m_data->TD.TTree_Event->Branch("Pulses_ch12", &Pulses_ch12);
-
-    m_data->TD.TTree_Event->Branch("Header_ch13", &Header_ch13);
-    m_data->TD.TTree_Event->Branch("Data_ch13", &Data_ch13);
-    m_data->TD.TTree_Event->Branch("Pulses_ch13", &Pulses_ch13);
-
-    m_data->TD.TTree_Event->Branch("Header_ch14", &Header_ch14);
-    m_data->TD.TTree_Event->Branch("Data_ch14", &Data_ch14);
-    m_data->TD.TTree_Event->Branch("Pulses_ch14", &Pulses_ch14);
-
-    m_data->TD.TTree_Event->Branch("Header_ch15", &Header_ch15);
-    m_data->TD.TTree_Event->Branch("Data_ch15", &Data_ch15);
-    m_data->TD.TTree_Event->Branch("Pulses_ch15", &Pulses_ch15);
-
-    m_data->TD.TTree_Event->Branch("Trigger_header_g0", &Trigger_header_g0);
-    m_data->TD.TTree_Event->Branch("Trigger_data_g0", &Trigger_data_g0);
-    m_data->TD.TTree_Event->Branch("Trigger_pulse_g0", &Trigger_pulse_g0);
-
-    m_data->TD.TTree_Event->Branch("Trigger_header_g1", &Trigger_header_g1);
-    m_data->TD.TTree_Event->Branch("Trigger_data_g1", &Trigger_data_g1);
-    m_data->TD.TTree_Event->Branch("Trigger_pulse_g1", &Trigger_pulse_g1);
-
     return true;
 }
 
@@ -100,6 +23,17 @@ bool StoreEvent::Execute()
     {
         std::cout <<"Stop has been called, skipping Store"<<std::endl;
         return true;
+    }
+    
+    if(m_data->TD.EndOfRun==true)
+    {
+        std::cout <<"Run-End has been called, skipping Store and cleaning up"<<std::endl;
+        return true; 
+    }
+
+    if(m_data->TD.NewRun==true)
+    {
+        InitRoot();
     }
 
     if(m_verbose>1){std::cout<<"Copying event ID..."<<std::endl;}
@@ -206,4 +140,85 @@ void StoreEvent::printMap(const std::map<int, std::vector<std::vector<unsigned i
 
         std::cout << std::endl;
     }
+}
+
+
+void StoreEvent::InitRoot()
+{
+    //Generate the rootfile
+    m_data->TD.RootFile_Event->cd();
+    m_data->TD.TTree_Event = new TTree("Event", "Event");
+    m_data->TD.TTree_Event->Branch("EventID", &EventID, "EventID/I");
+
+    m_data->TD.TTree_Event->Branch("Header_ch0", &Header_ch0);
+    m_data->TD.TTree_Event->Branch("Data_ch0", &Data_ch0);
+    m_data->TD.TTree_Event->Branch("Pulses_ch0", &Pulses_ch0);
+
+    m_data->TD.TTree_Event->Branch("Header_ch1", &Header_ch1);
+    m_data->TD.TTree_Event->Branch("Data_ch1", &Data_ch1);
+    m_data->TD.TTree_Event->Branch("Pulses_ch1", &Pulses_ch1);
+
+    m_data->TD.TTree_Event->Branch("Header_ch2", &Header_ch2);
+    m_data->TD.TTree_Event->Branch("Data_ch2", &Data_ch2);
+    m_data->TD.TTree_Event->Branch("Pulses_ch2", &Pulses_ch2);
+    
+    m_data->TD.TTree_Event->Branch("Header_ch3", &Header_ch3);
+    m_data->TD.TTree_Event->Branch("Data_ch3", &Data_ch3);
+    m_data->TD.TTree_Event->Branch("Pulses_ch3", &Pulses_ch3);
+
+    m_data->TD.TTree_Event->Branch("Header_ch4", &Header_ch4);
+    m_data->TD.TTree_Event->Branch("Data_ch4", &Data_ch4);
+    m_data->TD.TTree_Event->Branch("Pulses_ch4", &Pulses_ch4);
+
+    m_data->TD.TTree_Event->Branch("Header_ch5", &Header_ch5);
+    m_data->TD.TTree_Event->Branch("Data_ch5", &Data_ch5);
+    m_data->TD.TTree_Event->Branch("Pulses_ch5", &Pulses_ch5);
+    
+    m_data->TD.TTree_Event->Branch("Header_ch6", &Header_ch6);
+    m_data->TD.TTree_Event->Branch("Data_ch6", &Data_ch6);
+    m_data->TD.TTree_Event->Branch("Pulses_ch6", &Pulses_ch6);
+    
+    m_data->TD.TTree_Event->Branch("Header_ch7", &Header_ch7);
+    m_data->TD.TTree_Event->Branch("Data_ch7", &Data_ch7);
+    m_data->TD.TTree_Event->Branch("Pulses_ch7", &Pulses_ch7);
+
+    m_data->TD.TTree_Event->Branch("Header_ch8", &Header_ch8);
+    m_data->TD.TTree_Event->Branch("Data_ch8", &Data_ch8);
+    m_data->TD.TTree_Event->Branch("Pulses_ch8", &Pulses_ch8);
+
+    m_data->TD.TTree_Event->Branch("Header_ch9", &Header_ch9);
+    m_data->TD.TTree_Event->Branch("Data_ch9", &Data_ch9);
+    m_data->TD.TTree_Event->Branch("Pulses_ch9", &Pulses_ch9);
+    
+    m_data->TD.TTree_Event->Branch("Header_ch10", &Header_ch10);
+    m_data->TD.TTree_Event->Branch("Data_ch10", &Data_ch10);
+    m_data->TD.TTree_Event->Branch("Pulses_ch10", &Pulses_ch10);
+
+    m_data->TD.TTree_Event->Branch("Header_ch11", &Header_ch11);
+    m_data->TD.TTree_Event->Branch("Data_ch11", &Data_ch11);
+    m_data->TD.TTree_Event->Branch("Pulses_ch11", &Pulses_ch11);
+
+    m_data->TD.TTree_Event->Branch("Header_ch12", &Header_ch12);
+    m_data->TD.TTree_Event->Branch("Data_ch12", &Data_ch12);
+    m_data->TD.TTree_Event->Branch("Pulses_ch12", &Pulses_ch12);
+
+    m_data->TD.TTree_Event->Branch("Header_ch13", &Header_ch13);
+    m_data->TD.TTree_Event->Branch("Data_ch13", &Data_ch13);
+    m_data->TD.TTree_Event->Branch("Pulses_ch13", &Pulses_ch13);
+
+    m_data->TD.TTree_Event->Branch("Header_ch14", &Header_ch14);
+    m_data->TD.TTree_Event->Branch("Data_ch14", &Data_ch14);
+    m_data->TD.TTree_Event->Branch("Pulses_ch14", &Pulses_ch14);
+
+    m_data->TD.TTree_Event->Branch("Header_ch15", &Header_ch15);
+    m_data->TD.TTree_Event->Branch("Data_ch15", &Data_ch15);
+    m_data->TD.TTree_Event->Branch("Pulses_ch15", &Pulses_ch15);
+
+    m_data->TD.TTree_Event->Branch("Trigger_header_g0", &Trigger_header_g0);
+    m_data->TD.TTree_Event->Branch("Trigger_data_g0", &Trigger_data_g0);
+    m_data->TD.TTree_Event->Branch("Trigger_pulse_g0", &Trigger_pulse_g0);
+
+    m_data->TD.TTree_Event->Branch("Trigger_header_g1", &Trigger_header_g1);
+    m_data->TD.TTree_Event->Branch("Trigger_data_g1", &Trigger_data_g1);
+    m_data->TD.TTree_Event->Branch("Trigger_pulse_g1", &Trigger_pulse_g1);
 }

@@ -1,6 +1,7 @@
 verbose 1
+Visualisation 0
+ECMAX 0
 
 ROI_low 200
 ROI_high 500
 
-threshold_multiplier 0.5

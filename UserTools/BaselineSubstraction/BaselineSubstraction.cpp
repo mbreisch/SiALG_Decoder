@@ -26,6 +26,12 @@ bool BaselineSubstraction::Execute()
         return true;
     }
 
+    if(m_data->TD.EndOfRun==true)
+    {
+        std::cout <<"Run-End has been called, skipping BLS and cleaning up"<<std::endl;
+        return true; 
+    }
+
     for(std::map<int,vector<float>>::iterator it=m_data->TD.ParsedMap_Data.begin(); it!=m_data->TD.ParsedMap_Data.end(); ++it)
     {
         vector<float> in_vector;

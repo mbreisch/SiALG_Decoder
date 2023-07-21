@@ -27,24 +27,53 @@ bool EndChain::Execute()
         return true;
     }
 
+    if(m_data->TD.EndOfRun==true)
+    {
+        std::cout << "Finalising Event Rootfile: ... ";
+        m_data->TD.RootFile_Event->cd();
+        m_data->TD.RootFile_Event->Close();
+        // delete m_data->TD.RootFile_Event;
+        // m_data->TD.RootFile_Event = 0;
+        std::cout << "Done!" << std::endl;
+
+        std::cout << "Finalising Analysis Rootfile: ... ";
+        m_data->TD.RootFile_Analysis->cd();
+        m_data->TD.RootFile_Analysis->Close();
+        // delete m_data->TD.RootFile_Analysis;
+        // m_data->TD.RootFile_Analysis = 0;
+        std::cout << "Done!" << std::endl;
+
+        //Cleanup
+        for(int i_channel: m_data->TD.ListOfChannels)
+        {
+            std::cout << "Closing file for channel " << i_channel << std::endl;
+            if(m_data->TD.FileMap[i_channel].is_open())
+            {
+                m_data->TD.FileMap[i_channel].close();
+            }
+        }
+        std::cout<<"-------------------"<<std::endl;
+        m_data->TD.ListOfChannels.clear();
+        m_data->TD.FileMap.clear();
+        m_data->TD.PeakMinima.clear();
+        
+        m_data->TD.NewRun = true;
+        m_data->TD.EndOfRun = false;
+        m_data->TD.EventCounter = 0;
+        return true;
+    }
+
+    if(m_data->TD.NewRun == true)
+    {
+        m_data->TD.NewRun = false;
+        m_data->TD.EndOfRun = false;
+    }
+
     return true;
 }
 
 
 bool EndChain::Finalise()
 {
-    std::cout << "Finalising Event Rootfile: ... ";
-    m_data->TD.RootFile_Event->cd();
-    m_data->TD.RootFile_Event->Close();
-    delete m_data->TD.RootFile_Event;
-    m_data->TD.RootFile_Event = 0;
-    std::cout << "Done!" << std::endl;
-
-    std::cout << "Finalising Analysis Rootfile: ... ";
-    m_data->TD.RootFile_Analysis->cd();
-    m_data->TD.RootFile_Analysis->Close();
-    delete m_data->TD.RootFile_Analysis;
-    m_data->TD.RootFile_Analysis = 0;
-    std::cout << "Done!" << std::endl;
     return true;
 }

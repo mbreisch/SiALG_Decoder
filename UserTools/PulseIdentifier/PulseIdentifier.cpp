@@ -27,6 +27,12 @@ bool PulseIdentifier::Execute()
         return true;
     }
 
+    if(m_data->TD.EndOfRun==true)
+    {
+        std::cout <<"Run-End has been called, skipping Peakfinder and cleaning up"<<std::endl;
+        return true; 
+    }
+
     m_data->TD.PeakPositions.clear();
     vector<int> input;
     for(std::map<int,vector<float>>::iterator it=m_data->TD.ParsedMap_Data.begin(); it!=m_data->TD.ParsedMap_Data.end(); ++it)

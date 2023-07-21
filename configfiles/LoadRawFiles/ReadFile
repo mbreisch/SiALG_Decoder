@@ -1,11 +1,10 @@
 verbose 1
 
 # Runtime -1=All, 1-N=N number of events
-Runtime 100
+Runtime -1
 
 # Path options, if Path_Out is not given it will use Path_In
-Path_In /mnt/s/Data/SecData/
-#Path_Out /mnt/s/Data/SecData/
+Path_In /mnt/s/Data/Calibration/
 
 # File name options
 File_Prefix wave_

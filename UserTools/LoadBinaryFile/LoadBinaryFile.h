@@ -38,6 +38,9 @@ class LoadBinaryFile: public Tool
         std::string FullFilePath;
         std::string Trigger_0;
         std::string Trigger_1;
+        std::string line;
+        std::ifstream file;
+        std::string TMP_InPath;
 
     private:
 
@@ -51,6 +54,7 @@ class LoadBinaryFile: public Tool
 
         vector<unsigned int> LoadHeader(int i_channel);
         vector<float> LoadData(int i_channel);
+        bool LoadNewRun();
 
 };
 #endif

@@ -11,6 +11,7 @@ if (tool=="BaselineSubstraction") ret=new BaselineSubstraction;
 if (tool=="PulseIdentifier") ret=new PulseIdentifier;
 if (tool=="GetPhDistribution") ret=new GetPhDistribution;
 if (tool=="GetTTS") ret=new GetTTS;
-  if (tool=="EndChain") ret=new EndChain;
+if (tool=="EndChain") ret=new EndChain;
+  if (tool=="GetCharge") ret=new GetCharge;
 return ret;
 }

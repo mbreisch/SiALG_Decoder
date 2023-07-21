@@ -3,6 +3,8 @@
 TemporaryData::TemporaryData()
 {
     Stop= false;
+    EndOfRun = false;
+    NewRun = true;
     ListOfChannels = {};
 }
 
