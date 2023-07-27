@@ -4,7 +4,7 @@ verbose 1
 Runtime -1
 
 # Path options, if Path_Out is not given it will use Path_In
-Path_In /mnt/s/Data/Calibration/
+Path_In /mnt/s/Data/Calibration/RunList_d6
 
 # File name options
 File_Prefix wave_

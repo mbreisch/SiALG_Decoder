@@ -30,7 +30,7 @@ bool LoadBinaryFile::Initialise(std::string configfile, DataModel &data)
     m_data->TD.EventCounter = 0;
     TMP_InPath = "";
 
-    file.open(m_data->TD.Path_In+"RunList",ios_base::in); // Open the file
+    file.open(m_data->TD.Path_In,ios_base::in); // Open the file
     if(!file.is_open()) 
     {
         std::cerr << "Error opening file." << std::endl;
