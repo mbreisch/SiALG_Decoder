@@ -2,8 +2,12 @@
 
 #Application path location of applicaiton
 
-ToolDAQapp=`pwd`
+Dependencies=`pwd`/Dependencies
 
 source ${ToolDAQapp}/ToolDAQ/root/install/bin/thisroot.sh
 
-export LD_LIBRARY_PATH=`pwd`/lib:${ToolDAQapp}/lib:${ToolDAQapp}/ToolDAQ/zeromq-4.0.7/lib:${ToolDAQapp}/ToolDAQ/boost_1_66_0/install/lib:$LD_LIBRARY_PATH/lib:${ToolDAQapp}/ToolDAQ/root/install/lib
+export LD_LIBRARY_PATH=`pwd`/lib:${Dependencies}/zeromq-4.0.7/lib:${Dependencies}/boost_1_66_0/install/lib:${Dependencies}/pqxx/install/lib:$LD_LIBRARY_PATH/lib:${ToolDAQapp}/ToolDAQ/root/install/lib
+
+export SEGFAULT_SIGNALS="all"
+
+source ~/.profile

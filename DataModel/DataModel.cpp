@@ -1,6 +1,9 @@
 #include "DataModel.h"
 
-DataModel::DataModel(){}
+DataModel::DataModel(){
+  	pgclient.SetDataModel(this);
+  	postgres_helper.SetDataModel(this);
+}
 
 /*
 TTree* DataModel::GetTTree(std::string name){
@@ -17,7 +20,7 @@ void DataModel::AddTTree(std::string name,TTree *tree){
 }
 
 
-void DataModel::DeleteTTree(std::string name){
+void DataModel::DeleteTTree(std::string name,TTree *tree){
 
   m_trees.erase(name);
 

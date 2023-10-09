@@ -45,5 +45,7 @@ class GetCharge: public Tool
         int vis;
         int ECMAX;
 
+        void InitRoot();
+
 };
 #endif

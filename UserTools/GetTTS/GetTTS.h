@@ -50,6 +50,8 @@ class GetTTS: public Tool
         int trg_ch;
         int words_in_data;
 
+        void InitRoot();
+
 
 };
 #endif

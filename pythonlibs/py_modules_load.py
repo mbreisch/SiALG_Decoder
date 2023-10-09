@@ -80,3 +80,38 @@ def load_file_list():
         raise IOError(f"Error while reading the file '{file_path}': {str(e)}")
 
     return path_list
+
+
+"""
+Read a root file using uproot4 and extract data from specified trees and branches.
+
+Args:
+    path (str): The path to the root file.
+    treenames (list): A list of tree names to read.
+    branchnames (list): A list of branch names to extract data from.
+
+Returns:
+    dict: A dictionary containing the structured data.
+
+"""
+def load_events(path, treenames, branchnames):
+    try:
+        file = ur4.open(path)
+        data = {}
+        for treename in treenames:
+            tree = file[treename]
+            data[treename] = {}
+            for branchname in branchnames:
+                branch = tree[branchname]
+                data[treename][branchname] = branch.array()[0]
+        return data
+    except FileNotFoundError:
+        print(f"File '{path}' not found.")
+        return False
+    except KeyError:
+        #print(f"Tree or branch not found in file '{path}'.")
+        return False
+    except Exception as e:
+        print(f"An error occurred while reading the root file: {str(e)}")
+        return False
+

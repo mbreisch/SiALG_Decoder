@@ -194,8 +194,12 @@ vector<float> LoadBinaryFile::LoadData(int i_channel)
 bool LoadBinaryFile::LoadNewRun()
 {
     std::getline(file, line);
+    // while(!line.empty() && (std::isspace(line[0]) || line[0] == '#')) 
+    // {
+    //     std::getline(file, line); // Read the next line
+    // }
 
-    if(line == TMP_InPath)
+    if(line == TMP_InPath || line.empty()==true)
     {
         m_data->TD.Stop = true;
         return false;

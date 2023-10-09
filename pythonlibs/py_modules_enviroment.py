@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pprint
 
 def GetVoltageStability(file_path):
     with open(file_path, 'r') as file:
@@ -23,3 +24,24 @@ def GetVoltageStability(file_path):
         plt.hist(list_of_values,bins=np.arange(min(list_of_values),max(list_of_values)+bin_width,bin_width),label="Dist={}".format(set_to_channel[int(channel)]-np.mean(list_of_values)))
         plt.axvline(x=set_to_channel[int(channel)])
         plt.legend()
+
+
+def PlotVoltageEvolution(file_path):    
+    with open(file_path, 'r') as file:
+        path_list = file.read().splitlines()
+
+    dict = {}
+
+    for enum,entry in enumerate(path_list):
+        try:
+            date,channel,value = entry.split(";")
+        except ValueError:
+            print(enum,":",entry)
+            continue
+
+        if channel not in dict:
+            dict.update({channel:[]})
+        else:
+            dict[channel].append(float(value))
+
+    pprint.pprint(dict)

@@ -4,7 +4,7 @@ verbose 1
 Runtime -1
 
 # Path options, if Path_Out is not given it will use Path_In
-Path_In /mnt/s/Data/Calibration/RunList_d6
+Path_In /mnt/s/Data/Calibration/RunList
 
 # File name options
 File_Prefix wave_
@@ -20,6 +20,6 @@ bytes_in_dataword 4
 
 # PulseIdentifier
 threshold -11.0
-width 10
+width 5
 ROI_low 200
 ROI_high 500

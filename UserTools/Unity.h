@@ -1,10 +1,9 @@
 #include <DummyTool.h>
-#include <LoadBinaryFile.h>
-#include <StoreEvent.h>
-#include "BaselineSubstraction.h"
-#include "PulseIdentifier.h"
-#include "GetPhDistribution.h"
-
-#include "GetTTS.h"
-#include "EndChain.h"
-#include "GetCharge.h"
+#include <ACC_DataRead.h>
+#include <ACC_Receive.h>
+#include <ACC_SetupBoards.h>
+#include <ACC_Stream.h>
+#include <SeeConnectedBoards.h>
+#include "RunControl.h"
+#include "test.h"
+#include "PGStarter.h"

@@ -1,4 +1,4 @@
-ToolDAQ
+Dependencies
 *.o
 *.so
 include/*
