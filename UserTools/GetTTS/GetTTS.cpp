@@ -106,13 +106,14 @@ Double_t GaussianWA(Double_t *x, Double_t *par)
     return (amp / (TMath::Sqrt(2.0 * TMath::Pi())*sigma)) * TMath::Exp(-0.5 * TMath::Power((x[0] - mean) / sigma, 2));
 }
 
-Double_t sigmoid(Double_t *x, Double_t *par) {
-  Double_t t = x[0];
-  Double_t x0 = par[0];
-  Double_t s = par[1];
-  Double_t a = par[2];
-  Double_t y = 1.0 / (1.0 + TMath::Exp((x0 - t) / s));
-  return a * y;
+Double_t sigmoid(Double_t *x, Double_t *par) 
+{
+    Double_t t = x[0];
+    Double_t x0 = par[0];
+    Double_t s = par[1];
+    Double_t a = par[2];
+    Double_t y = 1.0 / (1.0 + TMath::Exp((x0 - t) / s));
+    return a * y;
 }
 
 float GetTTS::GetTriggerThreshold(int trg_ch)

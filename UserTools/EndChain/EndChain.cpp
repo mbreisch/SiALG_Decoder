@@ -13,6 +13,10 @@ bool EndChain::Initialise(std::string configfile, DataModel &data)
 
     if(!m_variables.Get("verbose",m_verbose)) m_verbose=1;
 
+    if(!m_variables.Get("Sum_Charge",Sum_Charge)) Sum_Charge=0;
+    if(!m_variables.Get("Sum_TTS",Sum_TTS)) Sum_TTS=0;
+    if(!m_variables.Get("Sum_PHD",Sum_PHD)) Sum_PHD=0;
+
 
     return true;
 }
@@ -55,8 +59,10 @@ bool EndChain::Execute()
         std::cout<<"-------------------"<<std::endl;
         m_data->TD.ListOfChannels.clear();
         m_data->TD.FileMap.clear();
-        m_data->TD.PeakMinima.clear();
-        
+        if(Sum_PHD==0){m_data->TD.PeakMinima.clear();}
+        if(Sum_TTS==0){m_data->TD.TTS_Map.clear();}
+        if(Sum_Charge==0){m_data->TD.Charge_Map.clear();}
+
         m_data->TD.NewRun = true;
         m_data->TD.EndOfRun = false;
         m_data->TD.EventCounter = 0;

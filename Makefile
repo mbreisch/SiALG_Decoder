@@ -1,6 +1,6 @@
 Dependencies=Dependencies
 
-CXXFLAGS=  -fPIC -Wpedantic -O3 -std=c++11 -Wno-attributes # -g -lSegFault -rdynamic -DDEBUG
+CXXFLAGS=  -fPIC -Wpedantic -O3 -std=c++14 -Wno-attributes # -g -lSegFault -rdynamic -DDEBUG
 # -Wl,--no-as-needed
 
 ifeq ($(MAKECMDGOALS),debug)
@@ -19,19 +19,15 @@ ZMQInclude= -I $(Dependencies)/zeromq-4.0.7/include/
 BoostLib= -L $(Dependencies)/boost_1_66_0/install/lib -lboost_date_time -lboost_serialization -lboost_iostreams -lboost_system
 BoostInclude= -I $(Dependencies)/boost_1_66_0/install/include
 
-PostgresLib=
-#-L $(Dependencies)/pqxx/install/lib -lpqxx -L /usr/pgsql-12/lib -lpq
-PostgresInclude=
-#-I $(Dependencies)/pqxx/install/include
+RootInclude= -I `root-config --incdir`
 
-DataModelInclude = $(PostgresInclude) 
-DataModelLib = $(PostgresLib) -lusb-1.0  
+RootLib=  -L `root-config --libdir --glibs` -lCore -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -lm -ldl -rdynamic -m64 -lGui -lGenVector -lMinuit -lGeom -lEG  -lEve #-lGL -lGLEW -lGLU
 
-MyToolsInclude = $(PostgresInclude) 
-#-I ToolDAQ/curl-7.65.3/install/include/
-MyToolsLib =
-#$(PostgresLib) -L lib -lCC -lL3 -lL4 -lm -lxx_usb -lcurl  
-#-L ToolDAQ/curl-7.65.3/install/lib/ -lcurl 
+DataModelInclude = $(RootInclude)
+DataModelLib = $(RootLib)
+
+MyToolsInclude =  $(RootInclude) #`python3-config --cflags` 
+MyToolsLib = -lcurl $(RootLib) #`python3-config --embed --libs`
 
 
 

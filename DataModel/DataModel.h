@@ -5,26 +5,17 @@
 #include <string>
 #include <vector>
 
-//#include "TTree.h"
+#include "TTree.h"
+#include "TFile.h"
 
 #include "Store.h"
 #include "BoostStore.h"
 #include "DAQLogging.h"
 #include "DAQUtilities.h"
 
-#include "PGClient.h"
-#include "PGHelper.h"
-
 #include <zmq.hpp>
 
-
-//ACC classes
-#include <ACC.h>
-#include <ACC_ETH.h>
-#include <ACC_USB.h>
-#include <PsecData.h>
-#include <PsecConfig.h>
-#include <TempClassStore.h>
+#include <TemporaryData.h>
 
 
 /**
@@ -69,27 +60,18 @@ class DataModel {
   */
 
   // database manager
-  PGClient pgclient;        // manages interface with the database
-  PGHelper postgres_helper; // provides user methods to perform routine database operations
 
-  bool running=false;
-  bool reinit=false;
-  
-  unsigned long run;
-  unsigned long subrun;
-  int RunConfig;
-  std::string RunType;
-  float RunTypeVersion;
-  // unused but needed
-  std::map<std::string,unsigned long> triggers;
+    bool running=false;
+    bool reinit=false;
 
-  //ACC
-  stdUSB* usb;
-  ACC* acc;
-  PsecData psec;
-  PsecConfig conf;
-  TempClassStore TCS;
+    unsigned long run;
+    unsigned long subrun;
+    int RunConfig;
+    std::string RunType;
+    float RunTypeVersion;
+    // unused but needed
 
+    TemporaryData TD;
   
  private:
 

@@ -14,6 +14,8 @@ bool PulseIdentifier::Initialise(std::string configfile, DataModel &data)
     if(!m_variables.Get("verbose",m_verbose)) m_verbose=1;
     if(!m_variables.Get("threshold",m_threshold)) m_threshold=2.0;
     if(!m_variables.Get("width",m_width)) m_width=5.0;
+    if(!m_variables.Get("limit_to_first_hit",limit_to_first_hit)) limit_to_first_hit=0;
+    
 
     return true;
 }
@@ -109,6 +111,13 @@ std::vector<int> PulseIdentifier::FindPulses(int channel, std::vector<float> wav
         }
     }
     
+    if(PulseReturn.size()>=limit_to_first_hit && limit_to_first_hit != -1)
+    {
+        vector<int> tmp_vec = PulseReturn;
+        PulseReturn.clear();
+        PulseReturn.insert(PulseReturn.begin(), tmp_vec.begin(), tmp_vec.begin() + limit_to_first_hit);
+    }
+
     return PulseReturn;
 }
 

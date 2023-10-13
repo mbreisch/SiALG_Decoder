@@ -4,14 +4,15 @@ Tool* Factory(std::string tool) {
 Tool* ret=0;
 
 // if (tool=="Type") tool=new Type;
+if (tool=="BaselineSubstraction") ret=new BaselineSubstraction;
 if (tool=="DummyTool") ret=new DummyTool;
-if (tool=="ACC_DataRead") ret=new ACC_DataRead;
-if (tool=="ACC_Receive") ret=new ACC_Receive;
-if (tool=="ACC_SetupBoards") ret=new ACC_SetupBoards;
-if (tool=="ACC_Stream") ret=new ACC_Stream;
-if (tool=="SeeConnectedBoards") ret=new SeeConnectedBoards;
-if (tool=="RunControl") ret=new RunControl;
-if (tool=="test") ret=new test;
-if (tool=="PGStarter") ret=new PGStarter;
+if (tool=="EndChain") ret=new EndChain;
+if (tool=="GetCharge") ret=new GetCharge;
+if (tool=="GetDecayTime") ret=new GetDecayTime;
+if (tool=="GetPhDistribution") ret=new GetPhDistribution;
+if (tool=="GetTTS") ret=new GetTTS;
+if (tool=="LoadBinaryFile") ret=new LoadBinaryFile;
+if (tool=="PulseIdentifier") ret=new PulseIdentifier;
+if (tool=="StoreEvent") ret=new StoreEvent;
 return ret;
 }

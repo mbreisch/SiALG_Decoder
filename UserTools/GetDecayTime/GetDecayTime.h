@@ -1,43 +1,56 @@
-#ifndef GetTTS_H
-#define GetTTS_H
+#ifndef GetDecayTime_H
+#define GetDecayTime_H
 
 #include <string>
 #include <iostream>
+#include <vector>
+#include <map>
 
 #include "Tool.h"
 
 #include <TF1.h>
+#include <TH1F.h>
 #include <TGraph.h>
 #include <TCanvas.h>
 #include <TApplication.h>
+#include <TFitResult.h>
 
+using namespace std;
 
 /**
- * \class GetTTS
+ * \class GetDecayTime
  *
  * This is a balnk template for a Tool used by the script to generate a new custom tool. Please fill out the descripton and author information.
 *
 * $Author: B.Richards $
 * $Date: 2019/05/28 10:44:00 $
-* Contact: b.richards@qmul.ac.uk
 */
 
-class GetTTS: public Tool 
-{
+class GetDecayTime: public Tool {
+
+
     public:
 
-        GetTTS(); ///< Simple constructor
+        GetDecayTime(); ///< Simple constructor
         bool Initialise(std::string configfile,DataModel &data); ///< Initialise Function for setting up Tool resorces. @param configfile The path and name of the dynamic configuration file to read in. @param data A reference to the transient data class used to pass information between Tools.
         bool Execute(); ///< Executre function used to perform Tool perpose. 
         bool Finalise(); ///< Finalise funciton used to clean up resorces.
 
-        vector<float> TTS_Ch0,TTS_Ch1,TTS_Ch2,TTS_Ch3,TTS_Ch4,TTS_Ch5,
-                        TTS_Ch6,TTS_Ch7,TTS_Ch8,TTS_Ch9,TTS_Ch10,TTS_Ch11,
-                        TTS_Ch12,TTS_Ch13,TTS_Ch14,TTS_Ch15;
+        vector<float> Decay_Ch0,Decay_Ch1,Decay_Ch2,Decay_Ch3,Decay_Ch4,Decay_Ch5,
+                        Decay_Ch6,Decay_Ch7,Decay_Ch8,Decay_Ch9,Decay_Ch10,Decay_Ch11,
+                        Decay_Ch12,Decay_Ch13,Decay_Ch14,Decay_Ch15;
 
-        vector<float> GetSlice(vector<float> data, int startIndex, int endIndex);
-        float GetTriggerThreshold(int trg_ch);
-        float GetChannelThreshold(vector<float> data, int position,float amplitude);
+        float guess_sigma, guess_t0, guess_n0, guess_tau0, guess_n1, guess_tau1, guess_n2, guess_tau2,guess_n3, guess_tau3, guess_offset,
+                n_bins,bins_start,bins_end,fit_start,fit_end;    
+
+        string fit_type;    
+
+        TF1 *fit_function;
+        TF1 *singleExpFunc0; // 4 parameters for Single_Exp
+        TF1 *singleExpFunc1; // 4 parameters for Single_Exp
+        TF1 *singleExpFunc2; // 4 parameters for Single_Exp
+        TF1 *singleExpFunc3; // 4 parameters for Single_Exp
+
 
     private:
         int ROI_low;
@@ -49,8 +62,13 @@ class GetTTS: public Tool
         float threshold_multiplier;
         int trg_ch;
         int words_in_data;
+        int m_visibility;
 
         void InitRoot();
+        void FitDecay(int channel, vector<float> data);
+
 
 };
+
+
 #endif

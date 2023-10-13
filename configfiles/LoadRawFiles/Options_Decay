@@ -1,0 +1,27 @@
+verbose 1
+visibility 0
+
+ROI_low 200
+ROI_high 1000
+
+threshold_multiplier 0.5
+
+fit_type normal
+
+guess_sigma 4
+guess_t0 -59
+guess_n0 200
+guess_tau0 4.5
+guess_n1 40
+guess_tau1 15.5
+guess_n2 5
+guess_tau2 79.5
+guess_n3 1
+guess_tau3 447
+guess_offset 5
+
+n_bins 70
+bins_start -62
+bins_end 120
+fit_start -62
+fit_end 120

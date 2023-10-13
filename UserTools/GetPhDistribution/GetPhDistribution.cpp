@@ -58,6 +58,7 @@ bool GetPhDistribution::Execute()
         InitRoot();
     }
 
+
     for(int i_channel: m_data->TD.ListOfChannels)
     {
         vector<float> InVector = GetSlicedDataFromROI(m_data->TD.ParsedMap_Data[i_channel],ROI_low,ROI_high);

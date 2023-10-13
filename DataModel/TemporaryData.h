@@ -9,8 +9,12 @@
 #include <sstream>
 #include <fstream>
 
-#include "TTree.h"
 #include "TFile.h"
+#include "TTree.h"
+#include <TF1.h>
+#include <TGraph.h>
+#include <TCanvas.h>
+#include <TApplication.h>
 
 using namespace std;
 
@@ -33,6 +37,7 @@ class TemporaryData{
     map<int,vector<float>> PeakMinima;
     map<int,vector<float>> TTS_Map;
     map<int,vector<float>> Charge_Map;
+    map<int,vector<float>> Decay_Map;
 
     vector<int> ListOfChannels;
 
@@ -49,7 +54,8 @@ class TemporaryData{
     TTree *TTree_Analysis_PHD;
     TTree *TTree_Analysis_TTS;
     TTree *TTree_Analysis_Charge;
-
+    TTree *TTree_Analysis_DecayTime;
+    
  private:
  
 };

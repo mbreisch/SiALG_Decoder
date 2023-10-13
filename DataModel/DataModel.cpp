@@ -1,9 +1,6 @@
 #include "DataModel.h"
 
-DataModel::DataModel(){
-  	pgclient.SetDataModel(this);
-  	postgres_helper.SetDataModel(this);
-}
+DataModel::DataModel(){}
 
 /*
 TTree* DataModel::GetTTree(std::string name){

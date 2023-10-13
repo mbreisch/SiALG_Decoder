@@ -34,6 +34,7 @@ class PulseIdentifier: public Tool
 
         float m_threshold;
         int m_width;
+        int limit_to_first_hit;
 
         vector<int> FindPulses(int channel,vector<float> waveform);
         vector<int> FindWall(vector<float> waveform);

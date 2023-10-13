@@ -4,7 +4,7 @@ verbose 1
 Runtime -1
 
 # Path options, if Path_Out is not given it will use Path_In
-Path_In /mnt/s/Data/Calibration/RunList
+Path_In /mnt/s/Data/RunList
 
 # File name options
 File_Prefix wave_
@@ -22,4 +22,10 @@ bytes_in_dataword 4
 threshold -11.0
 width 5
 ROI_low 200
-ROI_high 500
+ROI_high 1000
+limit_to_first_hit 1
+
+#End
+Sum_Charge 0
+Sum_TTS 0
+Sum_PHD 0
