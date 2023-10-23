@@ -36,8 +36,11 @@ class TemporaryData{
     map<int,vector<int>> PeakPositions;
     map<int,vector<float>> PeakMinima;
     map<int,vector<float>> TTS_Map;
+    map<int,vector<float>> TTS_Map_cut;
     map<int,vector<float>> Charge_Map;
     map<int,vector<float>> Decay_Map;
+    map<int,vector<float>> Decay_Map_uncut;
+    map<int,vector<float>> Decay_Map_cut;
 
     vector<int> ListOfChannels;
 

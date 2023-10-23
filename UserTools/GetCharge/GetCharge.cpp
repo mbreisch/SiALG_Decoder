@@ -71,6 +71,22 @@ bool GetCharge::Execute()
         for (int i = 0; i < data.size(); ++i)
             waveformHist->Fill(i / 5.12, data[i]/4.095);
 
+        //Find Lower Bin and Upper Bin
+        // int binMin = waveformHist->GetMinimumBin();
+        
+        // int lowerBin = ROI_low;
+        // for(int i_lower=0; ; i_lower++)
+        // {
+        //     if(waveformHist->GetBinContent(i_lower)/waveformHist->GetBinContent(binMin)<=0.1)
+        //     {
+        //         lower_bound = i_lower;
+        //         break;
+        //     }
+        // }
+        
+
+        // int upperBin = ROI_high;
+
         int lowerBin = waveformHist->FindBin(ROI_low/5.12);
         int upperBin = waveformHist->FindBin(ROI_high/5.12);
 

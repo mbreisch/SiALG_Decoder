@@ -60,7 +60,7 @@ bool EndChain::Execute()
         m_data->TD.ListOfChannels.clear();
         m_data->TD.FileMap.clear();
         if(Sum_PHD==0){m_data->TD.PeakMinima.clear();}
-        if(Sum_TTS==0){m_data->TD.TTS_Map.clear();}
+        if(Sum_TTS==0){m_data->TD.TTS_Map.clear(); m_data->TD.TTS_Map_cut.clear();}
         if(Sum_Charge==0){m_data->TD.Charge_Map.clear();}
 
         m_data->TD.NewRun = true;

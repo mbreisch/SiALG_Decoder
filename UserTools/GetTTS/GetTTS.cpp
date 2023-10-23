@@ -15,6 +15,7 @@ bool GetTTS::Initialise(std::string configfile, DataModel &data)
     if(!m_variables.Get("ROI_low",ROI_low)) ROI_low=0;
     if(!m_variables.Get("ROI_high",ROI_high)) ROI_high=1023;
     if(!m_variables.Get("threshold_multiplier",threshold_multiplier)) threshold_multiplier=0.5;      
+    if(!m_variables.Get("MultiplicityCut",MultiplicityCut)) MultiplicityCut=1;    
 
     return true;
 }
@@ -59,6 +60,8 @@ bool GetTTS::Execute()
         InitRoot();
     }
 
+    std::map<int,vector<float>> Single_Event_Map;
+
     for(int i_channel: m_data->TD.ListOfChannels)
     {
         if(m_data->TD.PeakPositions[i_channel].size()<=0){continue;}
@@ -84,6 +87,29 @@ bool GetTTS::Execute()
 
                 ChannelThresholdChannel = GetChannelThreshold(data,position,amplitude);
                 m_data->TD.TTS_Map[i_channel].push_back((ChannelThresholdChannel-TriggerThresholdChannel)/5.12);
+                Single_Event_Map[i_channel].push_back((ChannelThresholdChannel-TriggerThresholdChannel)/5.12);
+            }
+        }
+    }
+
+    if(Single_Event_Map.size()>=MultiplicityCut)
+    {
+        for(const auto& pair : Single_Event_Map) 
+        {
+            int key = pair.first;
+            const auto& vector2 = pair.second;
+
+            // cout<<"Channel "<<key<<" has "<<vector2.size()<<" with multipicity "<<MultiplicityCut<<endl;
+
+            auto it = m_data->TD.TTS_Map_cut.find(key);
+            if(it != m_data->TD.TTS_Map_cut.end()) 
+            {
+                // Key exists in TTS_Map_cut, extend the vector
+                it->second.insert(it->second.end(), vector2.begin(), vector2.end());
+            }else 
+            {
+                // Key does not exist in TTS_Map_cut, add a new entry
+                m_data->TD.TTS_Map_cut[key] = vector2;
             }
         }
     }
@@ -227,20 +253,20 @@ float GetTTS::GetChannelThreshold(vector<float> data, int position,float amplitu
 void GetTTS::InitRoot()
 {
     m_data->TD.TTree_Analysis_TTS = new TTree("TTree_Analysis_TTS", "TTree_Analysis_TTS");
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch0", &TTS_Ch0);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch1", &TTS_Ch1);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch2", &TTS_Ch2);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch3", &TTS_Ch3);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch4", &TTS_Ch4);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch5", &TTS_Ch5);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch6", &TTS_Ch6);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch7", &TTS_Ch7);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch8", &TTS_Ch8);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch9", &TTS_Ch9);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch10", &TTS_Ch10);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch11", &TTS_Ch11);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch12", &TTS_Ch12);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch13", &TTS_Ch13);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch14", &TTS_Ch14);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch15", &TTS_Ch15);  
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch0", "std::vector<float>", &TTS_Ch0);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch1", "std::vector<float>", &TTS_Ch1);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch2", "std::vector<float>", &TTS_Ch2);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch3", "std::vector<float>", &TTS_Ch3);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch4", "std::vector<float>", &TTS_Ch4);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch5", "std::vector<float>", &TTS_Ch5);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch6", "std::vector<float>", &TTS_Ch6);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch7", "std::vector<float>", &TTS_Ch7);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch8", "std::vector<float>", &TTS_Ch8);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch9", "std::vector<float>", &TTS_Ch9);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch10", "std::vector<float>", &TTS_Ch10);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch11", "std::vector<float>", &TTS_Ch11);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch12", "std::vector<float>", &TTS_Ch12);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch13", "std::vector<float>", &TTS_Ch13);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch14", "std::vector<float>", &TTS_Ch14);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch15", "std::vector<float>", &TTS_Ch15);  
 }

@@ -28,12 +28,12 @@ bool LoadBinaryFile::Initialise(std::string configfile, DataModel &data)
     if(!m_variables.Get("bytes_in_headerword",bytes_in_headerword)) bytes_in_headerword=0;
 
     m_data->TD.EventCounter = 0;
-    TMP_InPath = "";
+    TMP_InPath = "startline";
 
-    file.open(m_data->TD.Path_In,ios_base::in); // Open the file
-    if(!file.is_open()) 
+    RunList.open(m_data->TD.Path_In,ios_base::in); // Open the file
+    if(!RunList.is_open()) 
     {
-        std::cerr << "Error opening file." << std::endl;
+        std::cerr << "Error opening RunList." << std::endl;
         return 1;
     }
 
@@ -84,7 +84,7 @@ bool LoadBinaryFile::Execute()
             }else
             {
                 std::cout<<"-------------------"<<std::endl;
-                std::cout << "Reached EOF 1 for channel " << i_channel << std::endl;
+                if(m_verbose>2){std::cout << "Reached EOF 1 for channel " << i_channel << std::endl;}
                 m_data->TD.EndOfRun = true;
             }
         }else
@@ -105,7 +105,7 @@ bool LoadBinaryFile::Execute()
 
 bool LoadBinaryFile::Finalise()
 {
-    file.close();
+    RunList.close();
     return true;
 }
 
@@ -193,20 +193,25 @@ vector<float> LoadBinaryFile::LoadData(int i_channel)
 
 bool LoadBinaryFile::LoadNewRun()
 {
-    std::getline(file, line);
-    // while(!line.empty() && (std::isspace(line[0]) || line[0] == '#')) 
-    // {
-    //     std::getline(file, line); // Read the next line
-    // }
+    std::getline(RunList, line);
 
-    if(line == TMP_InPath || line.empty()==true)
+    while(true)
     {
-        m_data->TD.Stop = true;
-        return false;
+        if(line == TMP_InPath || line.empty() == true) //TMP_InPath is "startline" as init value
+        {
+            m_data->TD.Stop = true;
+            return false;
+        }else if(line[0] == '#')
+        {   
+            std::getline(RunList, line); //if # is at the start of a line ignore it and get the next line
+        }else
+        {
+            TMP_InPath = line;
+            break;
+        }
     }
 
-    TMP_InPath = line;
-    while (!TMP_InPath.empty() && (TMP_InPath.back() == '\n' || TMP_InPath.back() == '\r')) 
+    while(!TMP_InPath.empty() && (TMP_InPath.back() == '\n' || TMP_InPath.back() == '\r')) 
     {
         TMP_InPath.pop_back();
     }

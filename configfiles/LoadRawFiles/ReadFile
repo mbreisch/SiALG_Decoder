@@ -6,6 +6,10 @@ Runtime -1
 # Path options, if Path_Out is not given it will use Path_In
 Path_In /mnt/s/Data/RunList
 
+# Read variables for root files 
+Treename TTree_Analysis_TTS
+Branchname TTS_Ch
+
 # File name options
 File_Prefix wave_
 File_Sufix .dat
@@ -23,7 +27,7 @@ threshold -11.0
 width 5
 ROI_low 200
 ROI_high 1000
-limit_to_first_hit 1
+limit_to_first_hit 2
 
 #End
 Sum_Charge 0

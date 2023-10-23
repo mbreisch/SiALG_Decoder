@@ -5,7 +5,7 @@ ROI_low 200
 ROI_high 1000
 
 threshold_multiplier 0.5
-MultiplicityCut 0
+MultiplicityCut 3
 
 fit_type normal
 log_style true

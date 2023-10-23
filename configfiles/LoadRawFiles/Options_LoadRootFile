@@ -1,0 +1,8 @@
+verbose 1
+
+# Path options, if Path_Out is not given it will use Path_In
+Path_In /mnt/s/Data/RunList
+
+# Read variables for root files 
+Treename TTree_Analysis_TTS
+Branchname TTS_Ch

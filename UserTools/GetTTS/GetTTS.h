@@ -49,6 +49,7 @@ class GetTTS: public Tool
         float threshold_multiplier;
         int trg_ch;
         int words_in_data;
+        int MultiplicityCut;
 
         void InitRoot();
 

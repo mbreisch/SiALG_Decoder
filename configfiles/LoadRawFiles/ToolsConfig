@@ -5,8 +5,9 @@ StoreEvent StoreEvent configfiles/LoadRawFiles/ReadFile
 
 #Anastuff
 GetPhDistribution GetPhDistribution configfiles/LoadRawFiles/Options_PHD
-GetTTS GetTTS configfiles/LoadRawFiles/Options_Decay
+GetTTS GetTTS configfiles/LoadRawFiles/Options_Decay_cut
 GetDecayTime GetDecayTime configfiles/LoadRawFiles/Options_Decay
+GetDecayTime2 GetDecayTime configfiles/LoadRawFiles/Options_Decay_cut
 GetCharge GetCharge configfiles/LoadRawFiles/Options_Charge
 
 #End

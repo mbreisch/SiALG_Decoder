@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <iomanip>
 
 #include "Tool.h"
 
@@ -14,8 +15,13 @@
 #include <TCanvas.h>
 #include <TApplication.h>
 #include <TFitResult.h>
+#include <TLegend.h>
 
 using namespace std;
+
+#define RESET   "\033[0m"
+#define BLUE    "\033[34m"
+#define GREEN   "\033[32m"
 
 /**
  * \class GetDecayTime
@@ -63,6 +69,9 @@ class GetDecayTime: public Tool {
         int trg_ch;
         int words_in_data;
         int m_visibility;
+        int fit_type_offset;
+        int MultiplicityCut;
+        bool log_style;
 
         void InitRoot();
         void FitDecay(int channel, vector<float> data);

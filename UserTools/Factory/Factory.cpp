@@ -14,5 +14,6 @@ if (tool=="GetTTS") ret=new GetTTS;
 if (tool=="LoadBinaryFile") ret=new LoadBinaryFile;
 if (tool=="PulseIdentifier") ret=new PulseIdentifier;
 if (tool=="StoreEvent") ret=new StoreEvent;
+  if (tool=="LoadRootFile") ret=new LoadRootFile;
 return ret;
 }

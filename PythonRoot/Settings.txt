@@ -1,0 +1,33 @@
+####
+#   This is a settings file for the overall framework. A sub-function will produce a global dictonary from them.
+#   Therefore a structure like this is used Settings["Category"]["Value dictonary"]. Category is a string identifier.
+#   To make new categories use "+" at the beginning of the line. For entries in the categories a "key = value" cobination is used values can be either int, float, list or string.
+#   The value dictonary will then have an entry with under the key as string and the value as it's intended type.
+#   '#' is used as comment, empty lines will be skipped.
+#   The gobal dictonary can be used across all modules as long as the "DataCloud" module is imported
+####
+
++General
+## Paths
+Path_In = /mnt/s/Data/RunList
+File_Name = Analysis.root
+## Treename
+Treename = TTree_Analysis_TTS;1
+Branchname = TTS_Ch
+## Num Channels
+Number of Channels = 16
+
++Data
+Bin Width = 1
+X0 = -50
+A0 = 400
+A1 = 150
+A2 = 50
+A3 = 5
+TAU0 = 4.5
+TAU1 = 15.5
+TAU2 = 79.5
+TAU3 = 447
+
+Fit Start = -58
+Fit End = 80
