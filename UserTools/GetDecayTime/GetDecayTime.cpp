@@ -272,13 +272,13 @@ void GetDecayTime::Use_Exp1(int channel, TH1F *hist)
     fit_function->SetParameters(guess_t0, guess_n0, guess_tau0, guess_x0);
 
     // Set bounds for t0 between -100 and 100
-    fit_function->SetParLimits(0, -100, 100);
+    fit_function->SetParLimits(0, 0, 10*guess_t0);
     // Set bounds for n_0 between 0 and 100
     fit_function->SetParLimits(1, 0, 10*guess_n0);
     // Set bounds for tau_0 between 0 and 10
     fit_function->SetParLimits(2, 0, 10*guess_tau0);
     // Set bounds for x_0 between 0 and 10
-    fit_function->SetParLimits(3, 0, 10*guess_x0);
+    fit_function->SetParLimits(3, -100, 100);
 
     // Perform the fit
     hist->Fit(fit_function, fit_options.c_str()); // "S" for using the sum of squares method
@@ -373,7 +373,7 @@ void GetDecayTime::Use_Exp2(int channel, TH1F *hist)
     fit_function->SetParameters(guess_t0, guess_n0, guess_tau0, guess_n1, guess_tau1, guess_x0);
 
     // Set bounds for t0 between -100 and 100
-    fit_function->SetParLimits(0, -100, 100);
+    fit_function->SetParLimits(0, 0, 10*guess_t0);
     // Set bounds for n_0 between 0 and 100
     fit_function->SetParLimits(1, 0, 10*guess_n0);
     // Set bounds for tau_0 between 0 and 10
@@ -383,7 +383,7 @@ void GetDecayTime::Use_Exp2(int channel, TH1F *hist)
     // Set bounds for tau_1 between 0 and 10
     fit_function->SetParLimits(4, 0, 10*guess_tau1);
     // Set bounds for x_0 between 0 and 10
-    fit_function->SetParLimits(5, 0, 10*guess_x0);
+    fit_function->SetParLimits(5, -100, 100);
 
     // Perform the fit
     hist->Fit(fit_function, fit_options.c_str()); // "S" for using the sum of squares method
@@ -508,7 +508,7 @@ void GetDecayTime::Use_Exp3(int channel, TH1F *hist)
     fit_function->SetParameters(guess_t0, guess_n0, guess_tau0, guess_n1, guess_tau1, guess_n2, guess_tau2, guess_x0);
 
     // Set bounds for t0 between -100 and 100
-    fit_function->SetParLimits(0, -100, 100);
+    fit_function->SetParLimits(0, 0, 10*guess_t0);
     // Set bounds for n_0 between 0 and 100
     fit_function->SetParLimits(1, 0, 10*guess_n0);
     // Set bounds for tau_0 between 0 and 10
@@ -522,7 +522,7 @@ void GetDecayTime::Use_Exp3(int channel, TH1F *hist)
     // Set bounds for tau_2 between 0 and 10
     fit_function->SetParLimits(6, 0, 10*guess_tau2);
     // Set bounds for x_0 between 0 and 10
-    fit_function->SetParLimits(7, 0, 10*guess_x0);
+    fit_function->SetParLimits(7, -100, 100);
 
     // Perform the fit
     hist->Fit(fit_function, fit_options.c_str()); // "S" for using the sum of squares method
@@ -670,7 +670,7 @@ void GetDecayTime::Use_Exp4(int channel, TH1F *hist)
     fit_function->SetParameters(guess_t0, guess_n0, guess_tau0, guess_n1, guess_tau1, guess_n2, guess_tau2, guess_n3, guess_tau3, guess_x0);
 
     // Set bounds for t0 between -100 and 100
-    fit_function->SetParLimits(0, -100, 100);
+    fit_function->SetParLimits(0, 0, 10*guess_t0);
     // Set bounds for n_0 between 0 and 100
     fit_function->SetParLimits(1, 0, 10*guess_n0);
     // Set bounds for tau_0 between 0 and 10
@@ -688,7 +688,7 @@ void GetDecayTime::Use_Exp4(int channel, TH1F *hist)
     // Set bounds for tau_3 between 0 and 10
     fit_function->SetParLimits(8, 0, 10*guess_tau3);
     // Set bounds for x_0 between 0 and 10
-    fit_function->SetParLimits(9, 0, 10*guess_x0);
+    fit_function->SetParLimits(9, -100, 100);
 
     // Perform the fit
     hist->Fit(fit_function, fit_options.c_str()); // "S" for using the sum of squares method
@@ -859,7 +859,7 @@ void GetDecayTime::Use_Gaussian(int channel, TH1F *hist)
     fit_function->SetParameters(guess_gauss_amp,guess_gauss_mean,guess_gauss_sigma);
 
     fit_function->SetParLimits(0,   0,      1);
-    fit_function->SetParLimits(1,   -100, 100);
+    fit_function->SetParLimits(1,   -100,   100);
     fit_function->SetParLimits(2,   0,      10*guess_gauss_sigma);
 
     hist->Fit(fit_function, fit_options.c_str());
@@ -956,10 +956,10 @@ void GetDecayTime::Use_Gaussian_plus_Exp2(int channel, TH1F *hist)
     fit_function->SetParLimits(2,   0,      10*guess_tau0);
     fit_function->SetParLimits(3,   0,      1);
     fit_function->SetParLimits(4,   0,      10*guess_tau1);
-    fit_function->SetParLimits(5,   0,      10*guess_x0);
+    fit_function->SetParLimits(5,   -100,   100);
 
     fit_function->SetParLimits(6,   0,       10*guess_gauss_amp);
-    fit_function->SetParLimits(7,   0,       40);
+    fit_function->SetParLimits(7,   -100,    100);
     fit_function->SetParLimits(8,   0,       10);
 
     hist->Fit(fit_function, fit_options.c_str());

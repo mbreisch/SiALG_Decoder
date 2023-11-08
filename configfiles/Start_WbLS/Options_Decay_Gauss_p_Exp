@@ -8,7 +8,7 @@ threshold_multiplier 0.5
 MultiplicityCut 0
 
 fit_type gauss+exp2
-fit_options RQM
+fit_options RQMB
 log_style 1
 
 guess_x0 -60
@@ -22,12 +22,12 @@ guess_tau1 15.5
 # guess_n3 0.055
 # guess_tau3 447
 
-guess_gauss_amp 0.1
+guess_gauss_amp 0.3
 guess_gauss_mean -60
 guess_gauss_sigma 1.5
 
 n_bins 400
 bins_start -100
 bins_end 100
-fit_start -70
+fit_start -80
 fit_end 80
