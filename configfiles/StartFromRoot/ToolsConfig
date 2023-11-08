@@ -1,2 +1,4 @@
 LoadRootFile LoadRootFile configfiles/LoadRawFiles/Options_LoadRootFile
-#GetDecayTime GetDecayTime configfiles/LoadRawFiles/Options_Decay
+GetDecayTime GetDecayTime configfiles/LoadRawFiles/Options_Decay_Gauss
+GetDecayTime GetDecayTime configfiles/LoadRawFiles/Options_Decay_Gauss_p_Exp
+GetDecayTime GetDecayTime configfiles/LoadRawFiles/Options_Decay_Exp

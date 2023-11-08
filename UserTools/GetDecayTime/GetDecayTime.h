@@ -22,6 +22,8 @@ using namespace std;
 #define RESET   "\033[0m"
 #define BLUE    "\033[34m"
 #define GREEN   "\033[32m"
+#define RED     "\033[31m"
+#define inf     1.0e10
 
 /**
  * \class GetDecayTime
@@ -46,17 +48,20 @@ class GetDecayTime: public Tool {
                         Decay_Ch6,Decay_Ch7,Decay_Ch8,Decay_Ch9,Decay_Ch10,Decay_Ch11,
                         Decay_Ch12,Decay_Ch13,Decay_Ch14,Decay_Ch15;
 
-        float guess_sigma, guess_t0, guess_n0, guess_tau0, guess_n1, guess_tau1, guess_n2, guess_tau2,guess_n3, guess_tau3, guess_offset,
+        float guess_x0, guess_t0, guess_n0, guess_tau0, guess_n1, guess_tau1, guess_n2, guess_tau2,guess_n3, guess_tau3, guess_offset,
+                guess_gauss_amp, guess_gauss_mean, guess_gauss_sigma,
                 n_bins,bins_start,bins_end,fit_start,fit_end;    
 
         string fit_type;    
+        string fit_options;
 
         TF1 *fit_function;
         TF1 *singleExpFunc0; // 4 parameters for Single_Exp
         TF1 *singleExpFunc1; // 4 parameters for Single_Exp
         TF1 *singleExpFunc2; // 4 parameters for Single_Exp
         TF1 *singleExpFunc3; // 4 parameters for Single_Exp
-
+        TF1 *singleExpFunc;
+    	TF1 *singleGaussFunc;
 
     private:
         int ROI_low;
@@ -75,6 +80,13 @@ class GetDecayTime: public Tool {
 
         void InitRoot();
         void FitDecay(int channel, vector<float> data);
+
+        void Use_Gaussian(int channel, TH1F *hist);
+        void Use_Gaussian_plus_Exp2(int channel, TH1F *hist);
+        void Use_Exp1(int channel, TH1F *hist);
+        void Use_Exp2(int channel, TH1F *hist);
+    	void Use_Exp3(int channel, TH1F *hist);
+        void Use_Exp4(int channel, TH1F *hist);
 
 
 };

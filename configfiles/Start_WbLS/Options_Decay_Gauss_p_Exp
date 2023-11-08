@@ -1,0 +1,33 @@
+verbose 1
+visibility 0
+
+ROI_low 200
+ROI_high 1000
+
+threshold_multiplier 0.5
+MultiplicityCut 0
+
+fit_type gauss+exp2
+fit_options RQM
+log_style 1
+
+guess_x0 -60
+guess_t0 1.5
+guess_n0 0.9
+guess_tau0 2.5
+guess_n1 0.1
+guess_tau1 15.5
+# guess_n2 0.05
+# guess_tau2 75
+# guess_n3 0.055
+# guess_tau3 447
+
+guess_gauss_amp 0.1
+guess_gauss_mean -60
+guess_gauss_sigma 1.5
+
+n_bins 400
+bins_start -100
+bins_end 100
+fit_start -70
+fit_end 80

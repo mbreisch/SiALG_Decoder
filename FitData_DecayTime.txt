@@ -1,0 +1,245 @@
+Fit result, channel 0, fit type was gauss
+Amp = 0.1 +/- 0.252441
+Mean = -91.1218 +/- 107.109
+Sigma = 1.5 +/- 3.78662
+---------------
+Fit result, channel 1, fit type was gauss
+Amp = 0.1 +/- 0.252441
+Mean = -97.6692 +/- 100.677
+Sigma = 1.5 +/- 3.78662
+---------------
+Fit result, channel 2, fit type was gauss
+Amp = 0.248573 +/- 0.64321
+Mean = -56.7068 +/- 2.66046
+Sigma = 0.087846 +/- 9.542
+---------------
+Fit result, channel 3, fit type was gauss
+Amp = 0.873342 +/- 0.892607
+Mean = -50.201 +/- 0.120243
+Sigma = 0.0206017 +/- 0.0655045
+---------------
+Fit result, channel 4, fit type was gauss
+Amp = 0.987012 +/- 0.723028
+Mean = -47.125 +/- 0.325615
+Sigma = 0.0662366 +/- 0.243244
+---------------
+Fit result, channel 5, fit type was gauss
+Amp = 0.57582 +/- 0.50253
+Mean = -58.6386 +/- 5.69732
+Sigma = 0.0740568 +/- 12.4342
+---------------
+Fit result, channel 6, fit type was gauss
+Amp = 0.995233 +/- 0.980015
+Mean = -55.6254 +/- 0.272859
+Sigma = 0.0657295 +/- 0.200894
+---------------
+Fit result, channel 7, fit type was gauss
+Amp = 0.898549 +/- 0.575598
+Mean = -57.8731 +/- 0.433515
+Sigma = 0.0673165 +/- 0.440806
+---------------
+Fit result, channel 8, fit type was gauss
+Amp = 0.995382 +/- 0.989896
+Mean = -2.62604 +/- 6.36885
+Sigma = 0.0652131 +/- 10.93
+---------------
+Fit result, channel 9, fit type was gauss
+Amp = 0.00283273 +/- 0.847164
+Mean = -89.4758 +/- 0
+Sigma = 0.701278 +/- 0
+---------------
+Fit result, channel 10, fit type was gauss
+Amp = 0.791762 +/- 0.714545
+Mean = 15.3696 +/- 0.524242
+Sigma = 0.0683548 +/- 0.549575
+---------------
+Fit result, channel 11, fit type was gauss
+Amp = 0.974833 +/- 0.571735
+Mean = -6.62315 +/- 0.370004
+Sigma = 0.0679105 +/- 0.293234
+---------------
+Fit result, channel 12, fit type was gauss
+Amp = 0.785563 +/- 0.72858
+Mean = -10.8635 +/- 0.505805
+Sigma = 0.0635003 +/- 0.665818
+---------------
+Fit result, channel 13, fit type was gauss
+Amp = 0.997529 +/- 0.773271
+Mean = 15.8771 +/- 0.295612
+Sigma = 0.0674562 +/- 0.211363
+---------------
+Fit result, channel 14, fit type was gauss
+Amp = 0.795595 +/- 0.545331
+Mean = -16.3661 +/- 2.26178
+Sigma = 0.0652207 +/- 10.3957
+---------------
+Fit result, channel 15, fit type was gauss
+Amp = 0.228362 +/- 0.589728
+Mean = -40.2544 +/- 5.40017
+Sigma = 0.091021 +/- 14.3551
+---------------
+Fit result, channel 404, fit type was gauss
+Amp = 0.468885 +/- 0.411758
+Mean = -18.6006 +/- 15.4574
+Sigma = 15 +/- 1.60248
+---------------
+Fit result, channel 0, fit type was gauss
+Amp = 0.500528 +/- 0.710632
+Mean = 27.0181 +/- 14.96
+Sigma = 15 +/- 11.5416
+---------------
+Fit result, channel 2, fit type was gauss
+Amp = 0.509283 +/- 0.712118
+Mean = -42.5431 +/- 16.2897
+Sigma = 15 +/- 1.98172
+---------------
+Fit result, channel 3, fit type was gauss
+Amp = 0.512804 +/- 0.712028
+Mean = -43.3337 +/- 16.3739
+Sigma = 15 +/- 1.78778
+---------------
+Fit result, channel 4, fit type was gauss
+Amp = 0.554115 +/- 0.710276
+Mean = -50.5301 +/- 17.5956
+Sigma = 15 +/- 2.8299
+---------------
+Fit result, channel 5, fit type was gauss
+Amp = 0.592799 +/- 0.702537
+Mean = -55.2597 +/- 18.8799
+Sigma = 15 +/- 10.727
+---------------
+Fit result, channel 6, fit type was gauss
+Amp = 0.505857 +/- 0.712939
+Mean = -43.466 +/- 16.5097
+Sigma = 15 +/- 2.0642
+---------------
+Fit result, channel 7, fit type was gauss
+Amp = 0.534377 +/- 0.713146
+Mean = -49.2702 +/- 17.4925
+Sigma = 15 +/- 3.36797
+---------------
+Fit result, channel 8, fit type was gauss
+Amp = 0.995382 +/- 0.989896
+Mean = -2.62604 +/- 6.36885
+Sigma = 0.0652131 +/- 10.93
+---------------
+Fit result, channel 9, fit type was gauss
+Amp = 0.00283273 +/- 0.847164
+Mean = -89.4758 +/- 0
+Sigma = 0.701278 +/- 0
+---------------
+Fit result, channel 10, fit type was gauss
+Amp = 0.500115 +/- 0.710425
+Mean = -10.7541 +/- 14.948
+Sigma = 15 +/- 3.43972
+---------------
+Fit result, channel 11, fit type was gauss
+Amp = 0.974833 +/- 0.571735
+Mean = -6.62315 +/- 0.370004
+Sigma = 0.0679105 +/- 0.293234
+---------------
+Fit result, channel 12, fit type was gauss
+Amp = 0.785563 +/- 0.72858
+Mean = -10.8635 +/- 0.505805
+Sigma = 0.0635003 +/- 0.665818
+---------------
+Fit result, channel 13, fit type was gauss
+Amp = 0.499971 +/- 0.42072
+Mean = 13.0005 +/- 2.7503
+Sigma = 2.75051 +/- 1.90926
+---------------
+Fit result, channel 14, fit type was gauss
+Amp = 0.5 +/- 0.710368
+Mean = 2.49996 +/- 14.9439
+Sigma = 15 +/- 12.411
+---------------
+Fit result, channel 15, fit type was gauss
+Amp = 0.500019 +/- 0.710377
+Mean = -7.75107 +/- 14.9457
+Sigma = 15 +/- 1.93998
+---------------
+Fit result, channel 404, fit type was gauss
+Amp = 0.524779 +/- 0.712491
+Mean = -46.7358 +/- 16.9332
+Sigma = 15 +/- 2.44526
+---------------
+Fit result, channel 0, fit type was gauss
+Amp = 0.500528 +/- 0.710632
+Mean = 27.0181 +/- 14.96
+Sigma = 15 +/- 11.5416
+---------------
+Fit result, channel 2, fit type was gauss
+Amp = 0.509283 +/- 0.712118
+Mean = -42.5431 +/- 16.2897
+Sigma = 15 +/- 1.98172
+---------------
+Fit result, channel 3, fit type was gauss
+Amp = 0.512804 +/- 0.712028
+Mean = -43.3337 +/- 16.3739
+Sigma = 15 +/- 1.78778
+---------------
+Fit result, channel 4, fit type was gauss
+Amp = 0.554115 +/- 0.710276
+Mean = -50.5301 +/- 17.5956
+Sigma = 15 +/- 2.8299
+---------------
+Fit result, channel 5, fit type was gauss
+Amp = 0.592799 +/- 0.702537
+Mean = -55.2597 +/- 18.8799
+Sigma = 15 +/- 10.727
+---------------
+Fit result, channel 6, fit type was gauss
+Amp = 0.505857 +/- 0.712939
+Mean = -43.466 +/- 16.5097
+Sigma = 15 +/- 2.0642
+---------------
+Fit result, channel 7, fit type was gauss
+Amp = 0.534377 +/- 0.713146
+Mean = -49.2702 +/- 17.4925
+Sigma = 15 +/- 3.36797
+---------------
+Fit result, channel 8, fit type was gauss
+Amp = 0.995382 +/- 0.989896
+Mean = -2.62604 +/- 6.36885
+Sigma = 0.0652131 +/- 10.93
+---------------
+Fit result, channel 9, fit type was gauss
+Amp = 0.00283273 +/- 0.847164
+Mean = -89.4758 +/- 0
+Sigma = 0.701278 +/- 0
+---------------
+Fit result, channel 10, fit type was gauss
+Amp = 0.500115 +/- 0.710425
+Mean = -10.7541 +/- 14.948
+Sigma = 15 +/- 3.43972
+---------------
+Fit result, channel 11, fit type was gauss
+Amp = 0.974833 +/- 0.571735
+Mean = -6.62315 +/- 0.370004
+Sigma = 0.0679105 +/- 0.293234
+---------------
+Fit result, channel 12, fit type was gauss
+Amp = 0.785563 +/- 0.72858
+Mean = -10.8635 +/- 0.505805
+Sigma = 0.0635003 +/- 0.665818
+---------------
+Fit result, channel 13, fit type was gauss
+Amp = 0.499971 +/- 0.42072
+Mean = 13.0005 +/- 2.7503
+Sigma = 2.75051 +/- 1.90926
+---------------
+Fit result, channel 14, fit type was gauss
+Amp = 0.5 +/- 0.710368
+Mean = 2.49996 +/- 14.9439
+Sigma = 15 +/- 12.411
+---------------
+Fit result, channel 15, fit type was gauss
+Amp = 0.500019 +/- 0.710377
+Mean = -7.75107 +/- 14.9457
+Sigma = 15 +/- 1.93998
+---------------
+Fit result, channel 404, fit type was gauss
+Amp = 0.524779 +/- 0.712491
+Mean = -46.7358 +/- 16.9332
+Sigma = 15 +/- 2.44526
+---------------

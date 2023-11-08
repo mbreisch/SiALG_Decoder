@@ -252,21 +252,22 @@ float GetTTS::GetChannelThreshold(vector<float> data, int position,float amplitu
 
 void GetTTS::InitRoot()
 {
+    m_data->TD.RootFile_Analysis->cd();
     m_data->TD.TTree_Analysis_TTS = new TTree("TTree_Analysis_TTS", "TTree_Analysis_TTS");
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch0", "std::vector<float>", &TTS_Ch0);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch1", "std::vector<float>", &TTS_Ch1);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch2", "std::vector<float>", &TTS_Ch2);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch3", "std::vector<float>", &TTS_Ch3);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch4", "std::vector<float>", &TTS_Ch4);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch5", "std::vector<float>", &TTS_Ch5);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch6", "std::vector<float>", &TTS_Ch6);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch7", "std::vector<float>", &TTS_Ch7);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch8", "std::vector<float>", &TTS_Ch8);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch9", "std::vector<float>", &TTS_Ch9);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch10", "std::vector<float>", &TTS_Ch10);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch11", "std::vector<float>", &TTS_Ch11);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch12", "std::vector<float>", &TTS_Ch12);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch13", "std::vector<float>", &TTS_Ch13);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch14", "std::vector<float>", &TTS_Ch14);
-    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch15", "std::vector<float>", &TTS_Ch15);  
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch0", &TTS_Ch0);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch1", &TTS_Ch1);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch2", &TTS_Ch2);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch3", &TTS_Ch3);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch4", &TTS_Ch4);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch5", &TTS_Ch5);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch6", &TTS_Ch6);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch7", &TTS_Ch7);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch8", &TTS_Ch8);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch9", &TTS_Ch9);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch10", &TTS_Ch10);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch11", &TTS_Ch11);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch12", &TTS_Ch12);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch13", &TTS_Ch13);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch14", &TTS_Ch14);
+    m_data->TD.TTree_Analysis_TTS->Branch("TTS_Ch15", &TTS_Ch15);  
 }

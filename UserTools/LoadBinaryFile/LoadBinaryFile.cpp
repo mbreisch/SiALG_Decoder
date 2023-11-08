@@ -83,8 +83,12 @@ bool LoadBinaryFile::Execute()
                 m_data->TD.ParsedMap_Data.insert(std::pair<int,vector<float>>(i_channel,tmp_D));
             }else
             {
-                std::cout<<"-------------------"<<std::endl;
-                if(m_verbose>2){std::cout << "Reached EOF 1 for channel " << i_channel << std::endl;}
+                
+                if(m_verbose>2)
+                {
+                    std::cout<<"-------------------"<<std::endl;
+                    std::cout << "Reached EOF 1 for channel " << i_channel << std::endl;
+                }
                 m_data->TD.EndOfRun = true;
             }
         }else
