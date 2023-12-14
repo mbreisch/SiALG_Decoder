@@ -223,6 +223,12 @@ bool LoadBinaryFile::LoadNewRun()
     if(!m_variables.Get("Path_Out",m_data->TD.Path_Out)) m_data->TD.Path_Out=TMP_InPath;
 
     std::cout<<"Loading data files from "<<TMP_InPath<<std::endl;
+
+    std::string logbook_name = m_data->TD.Path_In + "_logbook.txt";
+    ofstream outfile_logbook(logbook_name.c_str(), ios_base::out | ios_base::app);
+    outfile_logbook<<"Loading data files from "<<TMP_InPath<<std::endl;
+    outfile_logbook.close();
+
     std::cout<<"-------------------"<<std::endl;
     for(int i_channel=0; i_channel<MAX_NUM_CHANNELS; i_channel++)
     {

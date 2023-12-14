@@ -129,7 +129,7 @@ Double_t GaussianWA(Double_t *x, Double_t *par)
     Double_t amp = par[0];
     Double_t mean = par[1];
     Double_t sigma = par[2];
-    return (amp / (TMath::Sqrt(2.0 * TMath::Pi())*sigma)) * TMath::Exp(-0.5 * TMath::Power((x[0] - mean) / sigma, 2));
+    return (amp) * TMath::Exp(-0.5 * TMath::Power((x[0] - mean) / sigma, 2));
 }
 
 Double_t sigmoid(Double_t *x, Double_t *par) 
@@ -177,7 +177,7 @@ float GetTTS::GetTriggerThreshold(int trg_ch)
     Double_t r_s0 = fitFunc->GetParameter(1);
     Double_t r_a0 = fitFunc->GetParameter(2);
 
-    threshold_channel = threshold_multiplier*r_a0;
+    threshold_channel = threshold_multiplier*min_val;
 
     // Double_t amplitudeError = fitFunc->GetParError(0);
     // Double_t meanError = fitFunc->GetParError(1);
@@ -196,6 +196,9 @@ float GetTTS::GetTriggerThreshold(int trg_ch)
     // canvas->Draw();
     // app.Run();
 
+    delete graph;
+    delete fitFunc;
+
     return TriggerThresholdChannel;
 }
 
@@ -213,7 +216,7 @@ float GetTTS::GetChannelThreshold(vector<float> data, int position,float amplitu
 
     // Create a TF1 object using the fitting function and set initial parameter values
     TF1* fitFunc = new TF1("fitFunc", GaussianWA, ROI_low, ROI_high, 3);
-    fitFunc->SetParameters(TMath::Sqrt(2*TMath::Pi())*amplitude, position, 5.0); // Set initial parameter values
+    fitFunc->SetParameters(amplitude, position, 5.0); // Set initial parameter values
 
     // Fit the graph with the TF1 function
     graph->Fit(fitFunc, "RQ");
@@ -223,14 +226,14 @@ float GetTTS::GetChannelThreshold(vector<float> data, int position,float amplitu
     Double_t r_mean = fitFunc->GetParameter(1);
     Double_t r_sigma = fitFunc->GetParameter(2);
 
-    threshold_channel = threshold_multiplier*(r_amplitude/(TMath::Sqrt(2*TMath::Pi())*r_sigma));
+    threshold_channel = threshold_multiplier*r_amplitude;
 
     // Double_t amplitudeError = fitFunc->GetParError(0);
     // Double_t meanError = fitFunc->GetParError(1);
     // Double_t stddevError = fitFunc->GetParError(2);
 
-    float t1 = r_mean + TMath::Sqrt( - 2 * r_sigma*r_sigma * TMath::Log(TMath::Sqrt(2*TMath::Pi())*r_sigma*threshold_channel/r_amplitude));
-    float t2 = r_mean - TMath::Sqrt( - 2 * r_sigma*r_sigma * TMath::Log(TMath::Sqrt(2*TMath::Pi())*r_sigma*threshold_channel/r_amplitude));
+    float t1 = r_mean + TMath::Sqrt( - 2 * TMath::Power(r_sigma,2) * TMath::Log(threshold_channel/r_amplitude));
+    float t2 = r_mean - TMath::Sqrt( - 2 * TMath::Power(r_sigma,2) * TMath::Log(threshold_channel/r_amplitude));
 
     if(t1>t2)
     {
@@ -246,6 +249,10 @@ float GetTTS::GetChannelThreshold(vector<float> data, int position,float amplitu
     // fitFunc->Draw("same"); // Draw the fitted function on top
     // canvas->Draw();
     // app.Run();
+
+    delete graph;
+    delete fitFunc;
+
     return ChannelThresholdChannel;
 }
 

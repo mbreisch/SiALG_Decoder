@@ -16,6 +16,7 @@
 #include <zmq.hpp>
 
 #include <TemporaryData.h>
+#include <FitModels.h>
 
 
 /**
@@ -72,6 +73,7 @@ class DataModel {
     // unused but needed
 
     TemporaryData TD;
+    FitModels FitModel;
   
  private:
 

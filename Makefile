@@ -21,7 +21,7 @@ BoostInclude= -I $(Dependencies)/boost_1_66_0/install/include
 
 RootInclude= -I `root-config --incdir`
 
-RootLib=  -L `root-config --libdir --glibs` -lCore -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -lm -ldl -rdynamic -m64 -lGui -lGenVector -lMinuit -lGeom -lEG  -lEve #-lGL -lGLEW -lGLU
+RootLib=  -L `root-config --libdir --glibs` -lCore -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -lm -ldl -rdynamic -m64 -lGui -lGenVector -lMinuit -lGeom -lEG  -lEve -lRooFit -lRooFitCore -lRooStats#-lGL -lGLEW -lGLU
 
 DataModelInclude = $(RootInclude)
 DataModelLib = $(RootLib)

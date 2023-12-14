@@ -9,13 +9,28 @@
 
 #include "Tool.h"
 
+#include <TH1.h>
 #include <TF1.h>
+#include <TVirtualFFT.h>
 #include <TH1F.h>
 #include <TGraph.h>
 #include <TCanvas.h>
 #include <TApplication.h>
 #include <TFitResult.h>
+#include <TF1Convolution.h>
 #include <TLegend.h>
+
+#include <TROOT.h>
+#include <RooWorkspace.h>
+#include <RooRealVar.h>
+#include <RooGaussian.h>
+#include <RooDataSet.h>
+#include <RooDataHist.h>
+#include <RooPlot.h>
+#include <RooGenericPdf.h>
+#include <RooFFTConvPdf.h>
+#include <RooAddPdf.h>
+#include "RooGaussian.h"
 
 using namespace std;
 
@@ -48,8 +63,8 @@ class GetDecayTime: public Tool {
                         Decay_Ch6,Decay_Ch7,Decay_Ch8,Decay_Ch9,Decay_Ch10,Decay_Ch11,
                         Decay_Ch12,Decay_Ch13,Decay_Ch14,Decay_Ch15;
 
-        float guess_x0, guess_t0, guess_n0, guess_tau0, guess_n1, guess_tau1, guess_n2, guess_tau2,guess_n3, guess_tau3, guess_offset,
-                guess_gauss_amp, guess_gauss_mean, guess_gauss_sigma,
+        float guess_x0, gauss_sigma, guess_sigma, guess_t0, guess_n0, guess_tau0, guess_n1, guess_tau1, guess_n2, guess_tau2,guess_n3, guess_tau3, guess_offset,
+                guess_gauss_amp, guess_gauss_mean, guess_gauss_sigma, guess_tauR,
                 n_bins,bins_start,bins_end,fit_start,fit_end;    
 
         string fit_type;    
@@ -62,6 +77,7 @@ class GetDecayTime: public Tool {
         TF1 *singleExpFunc3; // 4 parameters for Single_Exp
         TF1 *singleExpFunc;
     	TF1 *singleGaussFunc;
+        TF1 *linearFunc0;
 
     private:
         int ROI_low;
@@ -77,9 +93,11 @@ class GetDecayTime: public Tool {
         int fit_type_offset;
         int MultiplicityCut;
         bool log_style;
+        bool normalize;
 
         void InitRoot();
         void FitDecay(int channel, vector<float> data);
+        void AddLegend(TLegend* legend, const double paramValue, const double paramError, const std::string& paramName);
 
         void Use_Gaussian(int channel, TH1F *hist);
         void Use_Gaussian_plus_Exp2(int channel, TH1F *hist);
@@ -87,7 +105,9 @@ class GetDecayTime: public Tool {
         void Use_Exp2(int channel, TH1F *hist);
     	void Use_Exp3(int channel, TH1F *hist);
         void Use_Exp4(int channel, TH1F *hist);
-
+        void Use_Fold1(int channel, TH1F *hist);
+        void Use_Fold3(int channel, TH1F *hist);
+        void Use_Fold4(int channel, TH1F *hist);
 
 };
 

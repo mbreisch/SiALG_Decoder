@@ -37,6 +37,7 @@ class TemporaryData{
     map<int,vector<float>> PeakMinima;
     map<int,vector<float>> TTS_Map;
     map<int,vector<float>> TTS_Map_cut;
+    map<int,vector<unsigned int>> Timestamp_Map;
     map<int,vector<float>> Charge_Map;
     map<int,vector<float>> Decay_Map;
     map<int,vector<float>> Decay_Map_uncut;
@@ -56,6 +57,7 @@ class TemporaryData{
     TFile* RootFile_Analysis;
     TTree *TTree_Analysis_PHD;
     TTree *TTree_Analysis_TTS;
+    TTree *TTree_Analysis_Timestamp;
     TTree *TTree_Analysis_Charge;
     TTree *TTree_Analysis_DecayTime;
     

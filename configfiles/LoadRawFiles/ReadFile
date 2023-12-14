@@ -4,8 +4,9 @@ verbose 1
 Runtime -1
 
 # Path options, if Path_Out is not given it will use Path_In
-# Path_In /mnt/s/Data/RunList_LAB
-# Path_In /mnt/s/Data/RunList_WbLS
+#Path_In /mnt/s/Data/Calibration/RunList_a1
+#Path_In /mnt/s/Data/RunList_LAB_R1
+#Path_In /mnt/s/Data/RunList_WbLS
 Path_In /mnt/s/Data/RunList_HPLC
 
 # Read variables for root files 
@@ -25,11 +26,11 @@ words_in_data 1024
 bytes_in_dataword 4
 
 # PulseIdentifier
-threshold -11.0
+threshold -11
 width 5
 ROI_low 200
 ROI_high 1000
-limit_to_first_hit 1
+limit_to_first_hit -1
 
 #End
 Sum_Charge 0

@@ -50,5 +50,6 @@ class StoreEvent: public Tool
 
     private:
 
+        int eventid;
 };
 #endif

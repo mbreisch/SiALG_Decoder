@@ -35,6 +35,17 @@ bool PulseIdentifier::Execute()
         return true; 
     }
 
+    if(m_threshold==0)
+    {
+        float old_threshold = m_threshold; 
+        float voltage = GetCurrentVoltage();
+        m_threshold = -5.0/3.25 * voltage + 457.0/13.0;
+        if(old_threshold!=m_threshold)
+        {
+            std::cout<< "Old threshold was " << old_threshold << " and is now set to " << m_threshold <<std::endl;
+        }
+    }
+    
     m_data->TD.PeakPositions.clear();
     vector<int> input;
     for(std::map<int,vector<float>>::iterator it=m_data->TD.ParsedMap_Data.begin(); it!=m_data->TD.ParsedMap_Data.end(); ++it)
@@ -58,6 +69,57 @@ bool PulseIdentifier::Finalise()
     return true;
 }
 
+
+float PulseIdentifier::GetCurrentVoltage()
+{
+    float voltage = 0.0;
+
+    std::istringstream iss(m_data->TD.Path_Out.c_str());
+    std::string token;
+    std::vector<std::string> tokens;
+
+    while (std::getline(iss, token, '/')) 
+    {
+        tokens.push_back(token);
+    }
+
+    // Get the last token
+    if (!tokens.empty()) 
+    {
+        std::string lastToken = tokens.back();
+        // Remove the last character
+        if (!lastToken.empty()) 
+        {
+            lastToken.pop_back();
+            try 
+            {
+                // Convert the modified token to a float
+                size_t pos;
+                float floatValue = std::stof(lastToken, &pos);
+
+                // Check if the entire token is a valid float
+                if (pos == lastToken.length()) 
+                {
+                    voltage = floatValue;
+                } else {
+                    std::cerr << "Invalid characters after the float in token: " << lastToken << std::endl;
+                }
+            }catch(const std::invalid_argument& e) 
+            {
+                // Handle the case where the conversion fails
+                std::cerr << "Error converting to float for token '" << lastToken << "': " << e.what() << std::endl;
+            }
+        }else 
+        {
+            std::cerr << "Last token is empty." << std::endl;
+        }
+    }else 
+    {
+        std::cerr << "No tokens found." << std::endl;
+    }
+
+    return voltage;
+}
 
 std::vector<int> PulseIdentifier::FindPulses(int channel, std::vector<float> waveform) 
 {

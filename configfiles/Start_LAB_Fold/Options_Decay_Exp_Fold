@@ -6,15 +6,14 @@ ROI_high 1000 # unused
 threshold_multiplier 0.5 # unused
 MultiplicityCut 0 # used to set multiplicity cut option, only available if data has said cuts
 
-fit_type Exp4 # Available are Exp1, Exp2, Exp3 and Exp4
-fit_options RMBL # R: range, Q: quiet, M: Minuit2, B: binned, L: likelyhood
-log_style 0 # Switch on/off log style for y axis
+fit_type Fold3 # Available are Fold1, Fold3 and Fold4
+fit_options RQMBL # R: range, Q: quiet, M: Minuit2, B: binned, L: likelyhood
+log_style 1 # Switch on/off log style for y axis
 normalize 1 # Switch on/off normalization
 
 detector_resolution 2 # Detector resolution effect with of a gaussian modeled detector
 
-guess_t0 -50 # x direction offet of the histogram peak
-guess_tauR 2.5
+guess_t0 -56 # x direction offet of the histogram peak
 
 guess_n0 0.718 # 
 guess_tau0 4.7
@@ -28,7 +27,7 @@ guess_tau3 449
 guess_offset 0 # If available constant offset in y direction
 
 n_bins 400 # Number of bins for the histogram
-bins_start -100 # x value of bin start
-bins_end 100 # x value of bin end
-fit_start -100 # x value of fit start
-fit_end 100 # x value of fit end
+bins_start -60 # x value of bin start
+bins_end 40 # x value of bin end
+fit_start -60 # x value of fit start
+fit_end 40 # x value of fit end

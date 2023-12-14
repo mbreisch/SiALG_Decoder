@@ -13,6 +13,8 @@ bool StoreEvent::Initialise(std::string configfile, DataModel &data)
 
     if(!m_variables.Get("verbose",m_verbose)) m_verbose=1;
 
+    eventid = 0;
+
     return true;
 }
 
@@ -33,6 +35,7 @@ bool StoreEvent::Execute()
 
     if(m_data->TD.NewRun==true)
     {
+        eventid = 0;
         InitRoot();
     }
 
@@ -110,7 +113,7 @@ bool StoreEvent::Execute()
     m_data->TD.TTree_Event->Fill();
     m_data->TD.TTree_Event->Write();
     m_data->TD.TTree_Event->Reset();
-
+    InitRoot();
     return true;
 }
 
@@ -145,10 +148,50 @@ void StoreEvent::printMap(const std::map<int, std::vector<std::vector<unsigned i
 
 void StoreEvent::InitRoot()
 {
-    //Generate the rootfile
+    //Generate the rootfile 
+    if(m_verbose>1){std::cout<<"before cd"<<endl;}
     m_data->TD.RootFile_Event->cd();
-    m_data->TD.TTree_Event = new TTree("Event", "Event");
+    if(m_verbose>1){std::cout<<"after cd"<<endl;}
+    TString name;
+    bool treeExists=true;
+
+    while(treeExists)
+    {
+        name = "Event"+ std::to_string(eventid);
+        if(m_verbose>1){std::cout << "Does event " << name << " exist" << std::endl;}
+        TTree *tmp_tree = dynamic_cast<TTree*>(m_data->TD.RootFile_Event->Get(name));
+
+        // Check if the tree with the current name exists
+        treeExists = (tmp_tree != nullptr);
+
+        if(treeExists) 
+        {
+            if(m_verbose>1){std::cout << "Event " << name << " exists" << std::endl;}
+            eventid++;
+        }else{
+            if(m_verbose>1){std::cout << "Event " << name << " does not exist" << std::endl;}
+        	
+            
+            if(eventid==0)
+            {
+                TString previous_name = "Event"+ std::to_string(eventid);
+                m_data->TD.RootFile_Event->Delete(previous_name);
+            }else
+            {   
+                TString previous_name = "Event"+ std::to_string(eventid-1);
+                m_data->TD.RootFile_Event->Delete(previous_name);
+            }
+            
+
+            delete tmp_tree;
+            break;
+        }
+    }
+    if(m_verbose>1){std::cout<<"before tree"<<endl;}
+    // Create a new tree with the unique name
+    m_data->TD.TTree_Event = new TTree(name, name);
     m_data->TD.TTree_Event->Branch("EventID", &EventID, "EventID/I");
+    if(m_verbose>1){std::cout<<"after tree"<<endl;}
 
     m_data->TD.TTree_Event->Branch("Header_ch0", &Header_ch0);
     m_data->TD.TTree_Event->Branch("Data_ch0", &Data_ch0);

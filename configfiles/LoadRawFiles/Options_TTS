@@ -1,6 +1,7 @@
 verbose 1
 
-ROI_low 1 #200
-ROI_high 1023 #500
+ROI_low 200
+ROI_high 1000
 
 threshold_multiplier 0.5
+MultiplicityCut 0

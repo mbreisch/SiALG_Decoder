@@ -1,0 +1,37 @@
+###########################################
++Files
+Path_In = ../Data/RunList_WbLS
+Treename = TTree_Analysis_TTS
+Branchname = TTS_Ch
+###########################################
++Histogram
+NBins = 500
+Bin Start = 0
+Bin End = 150
+Shift = -67
+Normalize = 1
+Log = 1
+###########################################
++Fixed Parameters
+Detector Resolution = 1.15
+###########################################
++Fit
+Type = both
+Upper = 10
+Lower = 0
+Method = none
+
+Initial X0 = 7
+Initial X1 = 8
+Initial N0 = 0.95
+Initial Tau0 = 2.5
+Initial N1 = 0.05
+Initial Tau1 = 15
+Initial N2 = 0.999
+Initial Tau2 = 1800
+
+Initial C = 0.5
+Initial TauR = 1.15
+
+Fit Start = 0
+Fit End = 130

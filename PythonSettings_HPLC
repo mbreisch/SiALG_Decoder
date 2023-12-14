@@ -1,0 +1,28 @@
+###########################################
++Files
+Path_In = ../Data/RunList_HPLC
+Treename = TTree_Analysis_TTS
+Branchname = TTS_Ch
+###########################################
++Histogram
+NBins = 500
+Bin Start = 0
+Bin End = 150
+Shift = -67
+Normalize = 1
+Log = 1
+###########################################
++Fixed Parameters
+Detector Resolution = 1.15
+###########################################
++Fit
+Type = both
+Upper = 50
+Lower = 0
+Method = none
+
+
+Initial Sigma = 0.5
+
+Fit Start = 5
+Fit End = 10

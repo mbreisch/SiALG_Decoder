@@ -5,8 +5,9 @@ StoreEvent StoreEvent configfiles/LoadRawFiles/ReadFile
 
 #Anastuff
 GetPhDistribution GetPhDistribution configfiles/LoadRawFiles/Options_PHD
-GetTTS GetTTS configfiles/LoadRawFiles/Options_Decay_cut
-GetCharge GetCharge configfiles/LoadRawFiles/Options_Charge
+GetTTS GetTTS configfiles/LoadRawFiles/Options_TTS
+#TimeStampTest TimeStampTest configfiles/LoadRawFiles/ReadFile
+#GetCharge GetCharge configfiles/LoadRawFiles/Options_Charge
 
 #End
 EndChain EndChain configfiles/LoadRawFiles/ReadFile

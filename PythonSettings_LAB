@@ -1,0 +1,36 @@
+###########################################
++Files
+Path_In = ../Data/RunList_LAB_R1
+Treename = TTree_Analysis_TTS
+Branchname = TTS_Ch
+###########################################
++Histogram
+NBins = 600
+Bin Start = 0
+Bin End = 150
+Shift = -61
+Normalize = 1
+Log = 1
+###########################################
++Fixed Parameters
+Detector Resolution = 1.5
+###########################################
++Fit
+Type = both
+Upper = 10
+Lower = 0
+Method = leastsq
+
+Initial X0 = 2
+Initial X1 = -10
+Initial N0 = 0.7
+Initial Tau0 = 4.5
+Initial N1 = 0.2
+Initial Tau1 = 15
+Initial N2 = 0.04
+Initial Tau2 = 80
+Initial N3 = 0.03
+Initial Tau3 = 449
+
+Fit Start = 0
+Fit End = 110

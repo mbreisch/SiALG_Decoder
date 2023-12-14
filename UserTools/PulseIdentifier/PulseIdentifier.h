@@ -5,6 +5,8 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <sstream>
+#include <stdexcept>
 
 #include "Tool.h"
 
@@ -38,6 +40,8 @@ class PulseIdentifier: public Tool
 
         vector<int> FindPulses(int channel,vector<float> waveform);
         vector<int> FindWall(vector<float> waveform);
+
+        float GetCurrentVoltage();
 
 };
 #endif
